@@ -24,15 +24,14 @@
 <h2>Menu</h2>
 
 <div class="menu">
-
 <div class="item">
-<img src="images/jallof-rice.png">
+<img src="images/jollof-rice.jpg">
 <p>Jollof Rice (RM12)</p>
 <input type="number" id="jollof" value="0" min="0">
 </div>
 
 <div class="item">
-<img src="images/fried-rice.png">
+<img src="images/fried-rice.jpg">
 <p>Fried Rice (RM13)</p>
 <input type="number" id="fried" value="0" min="0">
 </div>
@@ -72,27 +71,18 @@
 <p>Chin Chin (RM6)</p>
 <input type="number" id="chin" value="0" min="0">
 </div>
-
 </div>
 
 <!-- CALCULATE -->
 <button onclick="calculateOrder()">Calculate Order</button>
 
-<!-- SUMMARY -->
 <div id="summary"></div>
 
-<!-- PAYMENT (AFTER SUMMARY) -->
+<!-- PAYMENT -->
 <h2>Payment Method</h2>
 
-<label>
-<input type="radio" name="payment" value="COD" checked>
-Cash on Delivery
-</label>
-
-<label>
-<input type="radio" name="payment" value="Bank">
-Bank Transfer
-</label>
+<label><input type="radio" name="payment" value="COD" checked> Cash on Delivery</label>
+<label><input type="radio" name="payment" value="Bank"> Bank Transfer</label>
 
 <div id="bankBox" class="hidden">
 <p><b>Bank:</b> Maybank</p>
@@ -102,7 +92,7 @@ Bank Transfer
 <input type="file" id="receipt">
 </div>
 
-<!-- SUBMIT (LAST) -->
+<!-- SUBMIT LAST -->
 <div class="submit-area">
 <button onclick="submitOrder()">Submit Order</button>
 </div>
@@ -110,12 +100,12 @@ Bank Transfer
 <!-- THANK YOU -->
 <div id="thankYou" class="hidden">
 <h2>🎉 Thank you for your order!</h2>
-<p>We received your order successfully.</p>
 <p>We will contact you soon.</p>
 </div>
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
 </body>
 </html>
