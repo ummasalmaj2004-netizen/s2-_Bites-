@@ -9,23 +9,12 @@ const supabaseClient = supabase.createClient(
 
 // ================= PAYMENT TOGGLE =================
 // BANK TOGGLE (FIXED)
-document.addEventListener("DOMContentLoaded", function () {
-
-const radios = document.querySelectorAll('input[name="payment"]');
-
-radios.forEach(radio => {
-radio.addEventListener("change", function () {
-
-let bankBox = document.getElementById("bankBox");
-
-if (this.value === "Bank") {
-bankBox.style.display = "block";
-} else {
-bankBox.style.display = "none";
-}
-});
-});
-
+// BANK TOGGLE (put this at TOP or BOTTOM of script.js)
+document.querySelectorAll('input[name="payment"]').forEach(radio => {
+    radio.onchange = function () {
+        document.getElementById("bankBox").style.display =
+            this.value === "Bank" ? "block" : "none";
+    };
 });
 
 // CALCULATE ORDER
