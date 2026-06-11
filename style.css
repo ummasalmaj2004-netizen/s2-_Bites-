@@ -77,6 +77,13 @@ border: 1px solid #800000;
 background: #fff5f5;
 }
 
+#thankYou {
+margin-top: 10px;
+text-align: center;
+color: green;
+font-weight: bold;
+}
+
 .hidden {
 display: none;
 }
