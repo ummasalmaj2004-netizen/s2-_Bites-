@@ -9,15 +9,16 @@ const supabaseClient = supabase.createClient(
 
 // ================= PAYMENT TOGGLE =================
 // SHOW / HIDE BANK BOX
+// PAYMENT TOGGLE
 document.querySelectorAll('input[name="payment"]').forEach(radio => {
 radio.addEventListener("change", function () {
 
 let bankBox = document.getElementById("bankBox");
 
 if (this.value === "Bank") {
-bankBox.classList.remove("hidden");
+bankBox.style.display = "block";
 } else {
-bankBox.classList.add("hidden");
+bankBox.style.display = "none";
 }
 });
 });
@@ -71,28 +72,18 @@ document.getElementById("summary").innerHTML = `
 // SUBMIT ORDER
 function submitOrder() {
 
-let payment = document.querySelector('input[name="payment"]:checked').value;
-
-if (payment === "Bank") {
-let receipt = document.getElementById("receipt").files[0];
-
-if (!receipt) {
-alert("Please upload receipt");
-return;
-}
-}
-
 document.getElementById("summary").innerHTML = `
 <h2 style="color:green;">🎉 Thank You!</h2>
 <p>Your order has been placed successfully.</p>
 <p>We will contact you soon.</p>
 `;
 
-// RESET FORM
+// RESET
 document.getElementById("name").value = "";
 document.getElementById("phone").value = "";
 document.getElementById("address").value = "";
 
 document.querySelectorAll('input[type="number"]').forEach(i => i.value = 0);
+
 document.getElementById("receipt").value = "";
 }
