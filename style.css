@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial;
     background: #ffffff;
     margin: 0;
     padding: 20px;
@@ -9,7 +9,6 @@ body {
 .container {
     max-width: 900px;
     margin: auto;
-    background: white;
     border: 2px solid #800000;
     border-radius: 12px;
     padding: 20px;
@@ -44,8 +43,8 @@ input, textarea {
     border: 1px solid #800000;
     padding: 10px;
     border-radius: 10px;
-    text-align: center;
     background: #fff5f5;
+    text-align: center;
 }
 
 .item img {
@@ -61,6 +60,7 @@ button {
     background: #800000;
     color: white;
     border: none;
+    margin-top: 10px;
     border-radius: 6px;
     font-weight: bold;
 }
@@ -78,4 +78,19 @@ button:hover {
 
 .hidden {
     display: none;
+}
+
+#bankBox {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px dashed #800000;
+    background: #fffafa;
+}
+
+#thankYou {
+    margin-top: 15px;
+    padding: 15px;
+    background: #fff5f5;
+    border: 2px solid #800000;
+    text-align: center;
 }
