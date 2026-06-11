@@ -1,4 +1,4 @@
-// SHOW/HIDE BANK BOX
+// PAYMENT TOGGLE
 document.querySelectorAll('input[name="payment"]').forEach(radio => {
     radio.addEventListener("change", function () {
 
@@ -12,6 +12,7 @@ document.querySelectorAll('input[name="payment"]').forEach(radio => {
     });
 });
 
+// CALCULATE ORDER
 function calculateOrder() {
 
     let name = document.getElementById("name").value;
@@ -27,7 +28,7 @@ function calculateOrder() {
     let chin = Number(document.getElementById("chin").value);
 
     if (!name || !phone) {
-        alert("Please fill customer details");
+        alert("Fill customer details");
         return;
     }
 
@@ -54,7 +55,7 @@ function calculateOrder() {
         let receipt = document.getElementById("receipt").files[0];
 
         if (!receipt) {
-            alert("Please upload receipt");
+            alert("Upload receipt");
             return;
         }
 
@@ -69,4 +70,20 @@ function calculateOrder() {
         <p>Payment: ${payment}</p>
         <p>${receiptMsg}</p>
     `;
+}
+
+// SUBMIT ORDER
+function submitOrder() {
+
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+
+    if (!name || !phone) {
+        alert("Please fill details first");
+        return;
+    }
+
+    document.getElementById("thankYou").classList.remove("hidden");
+
+    document.getElementById("summary").innerHTML = "";
 }
