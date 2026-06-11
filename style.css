@@ -14,15 +14,8 @@ border-radius: 12px;
 padding: 20px;
 }
 
-h1 {
-text-align: center;
+h1, h2 {
 color: #800000;
-}
-
-h2 {
-color: #800000;
-border-bottom: 2px solid #800000;
-padding-bottom: 5px;
 }
 
 input, textarea {
@@ -43,8 +36,8 @@ gap: 10px;
 border: 1px solid #800000;
 padding: 10px;
 border-radius: 10px;
-text-align: center;
 background: #fff5f5;
+text-align: center;
 }
 
 .item img {
@@ -62,7 +55,7 @@ color: white;
 border: none;
 margin-top: 10px;
 border-radius: 6px;
-font-weight: bold;
+cursor: pointer;
 }
 
 button:hover {
@@ -74,7 +67,6 @@ margin-top: 15px;
 padding: 10px;
 border: 1px solid #800000;
 background: #fff5f5;
-border-radius: 8px;
 }
 
 .hidden {
@@ -91,7 +83,7 @@ background: #fffafa;
 .submit-area {
 display: flex;
 justify-content: flex-end;
-margin-top: 12px;
+margin-top: 10px;
 }
 
 .submit-area button {
