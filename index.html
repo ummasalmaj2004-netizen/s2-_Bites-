@@ -76,8 +76,12 @@
 
     </div>
 
+    <!-- BUTTONS -->
     <button onclick="calculateOrder()">Calculate Order</button>
 
+    <button onclick="submitOrder()">Submit Order</button>
+
+    <!-- SUMMARY -->
     <div id="summary"></div>
 
     <!-- PAYMENT -->
@@ -99,6 +103,13 @@
         <p><b>Account No:</b> 1234567890</p>
 
         <input type="file" id="receipt">
+    </div>
+
+    <!-- THANK YOU -->
+    <div id="thankYou" class="hidden">
+        <h2>🎉 Thank you for your order!</h2>
+        <p>Your order has been received successfully.</p>
+        <p>We will contact you shortly for delivery.</p>
     </div>
 
 </div>
