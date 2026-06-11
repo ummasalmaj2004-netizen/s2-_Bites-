@@ -1,7 +1,8 @@
-                                                                                                                                                                   // PAYMENT TOGGLE
+// SHOW/HIDE BANK BOX
 document.querySelectorAll('input[name="payment"]').forEach(radio => {
     radio.addEventListener("change", function () {
-        const bankBox = document.getElementById("bankBox");
+
+        let bankBox = document.getElementById("bankBox");
 
         if (this.value === "Bank") {
             bankBox.classList.remove("hidden");
@@ -11,7 +12,6 @@ document.querySelectorAll('input[name="payment"]').forEach(radio => {
     });
 });
 
-// CALCULATE ORDER
 function calculateOrder() {
 
     let name = document.getElementById("name").value;
@@ -26,8 +26,8 @@ function calculateOrder() {
     let puff = Number(document.getElementById("puff").value);
     let chin = Number(document.getElementById("chin").value);
 
-    if (name === "" || phone === "") {
-        alert("Fill customer details");
+    if (!name || !phone) {
+        alert("Please fill customer details");
         return;
     }
 
@@ -41,7 +41,7 @@ function calculateOrder() {
         (puff * 4) +
         (chin * 6);
 
-    if (total === 0) {
+    if (total <= 0) {
         alert("Select at least one food item");
         return;
     }
@@ -54,7 +54,7 @@ function calculateOrder() {
         let receipt = document.getElementById("receipt").files[0];
 
         if (!receipt) {
-            alert("Upload payment receipt");
+            alert("Please upload receipt");
             return;
         }
 
