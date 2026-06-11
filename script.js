@@ -1,8 +1,18 @@
-// PAYMENT TOGGLE
+// ================= SUPABASE SETUP =================
+const SUPABASE_URL = "https://azqkjbfctblxzvjeroam.supabase.co";
+
+const SUPABASE_ANON_KEY = "sb_publishable_y5XJvIjhtTMqBPkqGbvPYA_w-nmk1zG";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
+
+// ================= PAYMENT TOGGLE =================
 document.querySelectorAll('input[name="payment"]').forEach(radio => {
     radio.addEventListener("change", function () {
 
-        let bankBox = document.getElementById("bankBox");
+        const bankBox = document.getElementById("bankBox");
 
         if (this.value === "Bank") {
             bankBox.classList.remove("hidden");
@@ -12,7 +22,7 @@ document.querySelectorAll('input[name="payment"]').forEach(radio => {
     });
 });
 
-// CALCULATE ORDER
+// ================= CALCULATE ORDER =================
 function calculateOrder() {
 
     let name = document.getElementById("name").value;
@@ -28,7 +38,7 @@ function calculateOrder() {
     let chin = Number(document.getElementById("chin").value);
 
     if (!name || !phone) {
-        alert("Fill customer details");
+        alert("Please fill customer details");
         return;
     }
 
@@ -55,7 +65,7 @@ function calculateOrder() {
         let receipt = document.getElementById("receipt").files[0];
 
         if (!receipt) {
-            alert("Upload receipt");
+            alert("Please upload receipt");
             return;
         }
 
@@ -64,22 +74,22 @@ function calculateOrder() {
 
     document.getElementById("summary").innerHTML = `
         <h3>Order Summary</h3>
-        <p>Name: ${name}</p>
-        <p>Phone: ${phone}</p>
-        <p>Total: RM ${total.toFixed(2)}</p>
-        <p>Payment: ${payment}</p>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Phone:</b> ${phone}</p>
+        <p><b>Total:</b> RM ${total.toFixed(2)}</p>
+        <p><b>Payment:</b> ${payment}</p>
         <p>${receiptMsg}</p>
     `;
 }
 
-// SUBMIT ORDER
+// ================= SUBMIT ORDER =================
 function submitOrder() {
 
     let name = document.getElementById("name").value;
     let phone = document.getElementById("phone").value;
 
     if (!name || !phone) {
-        alert("Please fill details first");
+        alert("Please fill customer details first");
         return;
     }
 
