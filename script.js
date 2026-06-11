@@ -8,19 +8,24 @@ const supabaseClient = supabase.createClient(
 );
 
 // ================= PAYMENT TOGGLE =================
-// SHOW / HIDE BANK BOX
-// PAYMENT TOGGLE
-document.querySelectorAll('input[name="payment"]').forEach(radio => {
+// BANK TOGGLE (FIXED)
+document.addEventListener("DOMContentLoaded", function () {
+
+const radios = document.querySelectorAll('input[name="payment"]');
+
+radios.forEach(radio => {
 radio.addEventListener("change", function () {
 
 let bankBox = document.getElementById("bankBox");
 
 if (this.value === "Bank") {
-bankBox.classList.remove("hidden");
+bankBox.style.display = "block";
 } else {
-bankBox.classList.add("hidden");
+bankBox.style.display = "none";
 }
 });
+});
+
 });
 
 // CALCULATE ORDER
@@ -69,7 +74,7 @@ document.getElementById("summary").innerHTML = `
 `;
 }
 
-// SUBMIT ORDER (THANK YOU BELOW BUTTON)
+// SUBMIT ORDER
 function submitOrder() {
 
 let payment = document.querySelector('input[name="payment"]:checked').value;
@@ -86,7 +91,7 @@ return;
 document.getElementById("thankYou").innerHTML =
 "🎉 Thank You! Your order has been placed successfully.";
 
-// RESET FORM
+// RESET
 document.getElementById("name").value = "";
 document.getElementById("phone").value = "";
 document.getElementById("address").value = "";
