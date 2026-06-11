@@ -8,6 +8,7 @@ const supabaseClient = supabase.createClient(
 );
 
 // ================= PAYMENT TOGGLE =================
+// SHOW / HIDE BANK BOX
 document.querySelectorAll('input[name="payment"]').forEach(radio => {
 radio.addEventListener("change", function () {
 
@@ -21,6 +22,7 @@ bankBox.classList.add("hidden");
 });
 });
 
+// CALCULATE ORDER
 function calculateOrder() {
 
 let name = document.getElementById("name").value;
@@ -36,7 +38,7 @@ let puff = Number(document.getElementById("puff").value);
 let chin = Number(document.getElementById("chin").value);
 
 if (!name || !phone) {
-alert("Please fill customer details");
+alert("Fill customer details");
 return;
 }
 
@@ -51,13 +53,25 @@ let total =
 (chin * 6);
 
 if (total <= 0) {
-alert("Select at least one food item");
+alert("Select food items");
 return;
 }
 
 let payment = document.querySelector('input[name="payment"]:checked').value;
 
-let receiptMsg = "";
+document.getElementById("summary").innerHTML = `
+<h3>Order Summary</h3>
+<p>Name: ${name}</p>
+<p>Phone: ${phone}</p>
+<p>Total: RM ${total.toFixed(2)}</p>
+<p>Payment: ${payment}</p>
+`;
+}
+
+// SUBMIT ORDER
+function submitOrder() {
+
+let payment = document.querySelector('input[name="payment"]:checked').value;
 
 if (payment === "Bank") {
 let receipt = document.getElementById("receipt").files[0];
@@ -66,16 +80,19 @@ if (!receipt) {
 alert("Please upload receipt");
 return;
 }
-
-receiptMsg = "Receipt: " + receipt.name;
 }
 
 document.getElementById("summary").innerHTML = `
-<h3>Order Summary</h3>
-<p>Name: ${name}</p>
-<p>Phone: ${phone}</p>
-<p>Total: RM ${total.toFixed(2)}</p>
-<p>Payment: ${payment}</p>
-<p>${receiptMsg}</p>
+<h2 style="color:green;">🎉 Thank You!</h2>
+<p>Your order has been placed successfully.</p>
+<p>We will contact you soon.</p>
 `;
+
+// RESET FORM
+document.getElementById("name").value = "";
+document.getElementById("phone").value = "";
+document.getElementById("address").value = "";
+
+document.querySelectorAll('input[type="number"]').forEach(i => i.value = 0);
+document.getElementById("receipt").value = "";
 }
