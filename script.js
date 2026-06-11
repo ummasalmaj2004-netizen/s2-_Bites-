@@ -1,47 +1,47 @@
-function calculateOrder() {
+const SUPABASE_URL = "https://azqkjbfctblxzvjeroam.supabase.co";
 
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
+const SUPABASE_KEY = "YOUR_PUBLISHABLE_KEY_HERE";
 
-    let jollof = Number(document.getElementById("jollof").value);
-    let fried = Number(document.getElementById("fried").value);
-    let yam = Number(document.getElementById("yam").value);
-    let eba = Number(document.getElementById("eba").value);
-    let suya = Number(document.getElementById("suya").value);
-    let moi = Number(document.getElementById("moi").value);
+const supabaseClient = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
-    if(name === "" || phone === ""){
-        alert("Please enter your name and phone number.");
-        return;
+const paymentOptions =
+document.querySelectorAll('input[name="payment"]');
+
+paymentOptions.forEach(option => {
+option.addEventListener("change", () => {
+
+```
+    const bankInfo =
+    document.getElementById("bankInfo");
+
+    if (
+        option.value === "Bank Transfer" &&
+        option.checked
+    ) {
+        bankInfo.style.display = "block";
+    } else if (option.checked) {
+        bankInfo.style.display = "none";
     }
+});
+```
 
-    let subtotal =
-        (jollof * 12) +
-        (fried * 13) +
-        (yam * 18) +
-        (eba * 15) +
-        (suya * 10) +
-        (moi * 5);
+});
 
-    if(subtotal === 0){
-        alert("Please select at least one food item.");
-        return;
-    }
+async function calculateOrder() {
 
-    let serviceCharge = subtotal * 0.05;
-    let deliveryFee = 5;
-    let total = subtotal + serviceCharge + deliveryFee;
+```
+let name =
+document.getElementById("name").value.trim();
 
-    document.getElementById("summary").innerHTML = `
-        <h2>Order Summary</h2>
+let phone =
+document.getElementById("phone").value.trim();
 
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
+let address =
+document.getElementById("address").value.trim();
 
-        <p>Subtotal: RM ${subtotal.toFixed(2)}</p>
-        <p>Service Charge (5%): RM ${serviceCharge.toFixed(2)}</p>
-        <p>Delivery Fee: RM ${deliveryFee.toFixed(2)}</p>
-
-        <h3>Total: RM ${total.toFixed(2)}</h3>
-    `;
-}
+let jollof =
+Number(document.getElementById("jollo
+```
