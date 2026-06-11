@@ -84,6 +84,29 @@ color: green;
 font-weight: bold;
 }
 
+/* BANK BOX */
 .hidden {
+display: none;
+}
+
+/* UPLOAD BUTTON */
+.upload-btn {
+display: inline-block;
+width: 100%;
+padding: 12px;
+background: #800000;
+color: white;
+text-align: center;
+border-radius: 6px;
+cursor: pointer;
+margin-top: 10px;
+font-weight: bold;
+}
+
+.upload-btn:hover {
+background: #a00000;
+}
+
+.upload-btn input {
 display: none;
 }
