@@ -85,26 +85,30 @@
     <div id="summary"></div>
 
     <!-- PAYMENT -->
-    <h2>Payment Method</h2>
+   <h2>Payment Method</h2>
 
-    <label>
-        <input type="radio" name="payment" value="COD" checked>
-        Cash on Delivery
-    </label>
+<label>
+    <input type="radio" name="payment" value="COD" checked>
+    Cash on Delivery
+</label>
 
-    <label>
-        <input type="radio" name="payment" value="Bank">
-        Bank Transfer
-    </label>
+<label>
+    <input type="radio" name="payment" value="Bank">
+    Bank Transfer
+</label>
 
-    <div id="bankBox" class="hidden">
-        <p><b>Bank:</b> Maybank</p>
-        <p><b>Account:</b> Naija Bites</p>
-        <p><b>Account No:</b> 1234567890</p>
+<div id="bankBox" class="hidden">
+    <p><b>Bank:</b> Maybank</p>
+    <p><b>Account:</b> Naija Bites</p>
+    <p><b>Account No:</b> 1234567890</p>
 
-        <input type="file" id="receipt">
-    </div>
+    <input type="file" id="receipt">
+</div>
 
+<!-- SUBMIT BUTTON (RIGHT SIDE) -->
+<div class="submit-area">
+    <button onclick="submitOrder()">Submit Order</button>
+</div>
     <!-- THANK YOU -->
     <div id="thankYou" class="hidden">
         <h2>🎉 Thank you for your order!</h2>
