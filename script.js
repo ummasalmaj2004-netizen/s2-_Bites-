@@ -18,30 +18,65 @@ option.addEventListener("change", () => {
     document.getElementById("bankInfo");
 
     if (
-        option.value === "Bank Transfer" &&
-        option.checked
-    ) {
-        bankInfo.style.display = "block";
-    } else if (option.checked) {
-        bankInfo.style.display = "none";
+        op// PAYMENT TOGGLE
+document.querySelectorAll('input[name="payment"]').forEach(radio => {
+    radio.addEventListener("change", function () {
+        const bankBox = document.getElementById("bankBox");
+
+        if (this.value === "Bank") {
+            bankBox.classList.remove("hidden");
+        } else {
+            bankBox.classList.add("hidden");
+        }
+    });
+});
+
+// CALCULATE ORDER
+function calculateOrder() {
+
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let fried = Number(document.getElementById("fried").value);
+    let jollof = Number(document.getElementById("jollof").value);
+    let suya = Number(document.getElementById("suya").value);
+    let puff = Number(document.getElementById("puff").value);
+    let chin = Number(document.getElementById("chin").value);
+    if (name === "" || phone === "") {
+        alert("Please fill customer details");
+        return;
     }
-});
-```
 
-});
+    let total =
+        (jollof * 12) +
+        (suya * 10) +
+        (puff * 4);
 
-async function calculateOrder() {
+    if (total === 0) {
+        alert("Select at least one food item");
+        return;
+    }
 
-```
-let name =
-document.getElementById("name").value.trim();
+    let payment = document.querySelector('input[name="payment"]:checked').value;
 
-let phone =
-document.getElementById("phone").value.trim();
+    let receiptText = "";
 
-let address =
-document.getElementById("address").value.trim();
+    if (payment === "Bank") {
+        let receipt = document.getElementById("receipt").files[0];
 
-let jollof =
-Number(document.getElementById("jollo
-```
+        if (!receipt) {
+            alert("Please upload payment receipt");
+            return;
+        }
+
+        receiptText = "Receipt uploaded: " + receipt.name;
+    }
+
+    document.getElementById("summary").innerHTML = `
+        <h3>Order Summary</h3>
+        <p>Name: ${name}</p>
+        <p>Phone: ${phone}</p>
+        <p>Total: RM ${total}</p>
+        <p>Payment: ${payment}</p>
+        <p>${receiptText}</p>
+    `;
+}
