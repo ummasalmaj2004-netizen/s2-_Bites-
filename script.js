@@ -71,8 +71,6 @@ let payment = document.querySelector('input[name="payment"]:checked').value;
 if (payment === "Bank") {
 let receipt = document.getElementById("receipt").files[0];
 
-if (!receipt) {
-alert("Please upload receipt");
 return;
 }
 }
