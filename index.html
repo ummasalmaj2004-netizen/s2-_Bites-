@@ -74,10 +74,7 @@
 
 </div>
 
-<button onclick="calculateOrder()">Calculate Order</button>
-
-<div id="summary"></div>
-
+<!-- PAYMENT FIRST (AS YOU REQUESTED) -->
 <h2>Payment Method</h2>
 
 <label>
@@ -91,16 +88,20 @@ Bank Transfer
 </label>
 
 <div id="bankBox" class="hidden">
-
 <p><b>Bank:</b> Maybank</p>
-<p><b>Account Name:</b> Naija Bites</p>
-<p><b>Account Number:</b> 1234567890</p>
+<p><b>Account:</b> Naija Bites</p>
+<p><b>Account No:</b> 1234567890</p>
 
 <input type="file" id="receipt">
-
 </div>
 
+<button onclick="calculateOrder()">Calculate Order</button>
+
+<div id="summary"></div>
+
 <button onclick="submitOrder()">Submit Order</button>
+
+<div id="thankYou"></div>
 
 </div>
 
