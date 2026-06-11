@@ -10,12 +10,19 @@ color: #3b0000;
 max-width: 900px;
 margin: auto;
 border: 2px solid #800000;
-border-radius: 12px;
 padding: 20px;
+border-radius: 12px;
 }
 
-h1, h2 {
+h1 {
+text-align: center;
 color: #800000;
+}
+
+h2 {
+color: #800000;
+border-bottom: 2px solid #800000;
+padding-bottom: 5px;
 }
 
 input, textarea {
@@ -36,8 +43,8 @@ gap: 10px;
 border: 1px solid #800000;
 padding: 10px;
 border-radius: 10px;
-background: #fff5f5;
 text-align: center;
+background: #fff5f5;
 }
 
 .item img {
@@ -53,8 +60,8 @@ padding: 12px;
 background: #800000;
 color: white;
 border: none;
-margin-top: 10px;
 border-radius: 6px;
+font-weight: bold;
 cursor: pointer;
 }
 
@@ -71,29 +78,4 @@ background: #fff5f5;
 
 .hidden {
 display: none;
-}
-
-#bankBox {
-margin-top: 10px;
-padding: 10px;
-border: 1px dashed #800000;
-background: #fffafa;
-}
-
-.submit-area {
-display: flex;
-justify-content: flex-end;
-margin-top: 10px;
-}
-
-.submit-area button {
-width: 180px;
-}
-
-#thankYou {
-margin-top: 15px;
-padding: 15px;
-border: 2px solid #800000;
-background: #fff5f5;
-text-align: center;
 }
