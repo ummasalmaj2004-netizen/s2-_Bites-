@@ -1,38 +1,57 @@
 body {
-    font-family: Arial;
-    background: #0f3d2e;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    color: white;
+    background: #ffffff; /* white background */
+    color: #3b0000; /* maroon text */
 }
 
 .container {
-    max-width: 900px;
+    max-width: 950px;
     margin: auto;
-    background: #145c43;
+    background: #fff;
     padding: 20px;
     border-radius: 12px;
+    border: 3px solid #800000; /* maroon border */
 }
 
+/* HEADER */
 h1 {
     text-align: center;
-    color: gold;
+    color: #800000; /* maroon */
 }
 
+h2 {
+    color: #800000;
+    border-bottom: 2px solid #800000;
+    padding-bottom: 5px;
+}
+
+/* INPUTS */
 input, textarea {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
+    border: 1px solid #800000;
+    border-radius: 6px;
+    outline: none;
 }
 
+input:focus, textarea:focus {
+    border: 2px solid #800000;
+}
+
+/* MENU GRID */
 .menu {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 10px;
+    gap: 12px;
+    margin-top: 10px;
 }
 
 .item {
-    background: #1c6b4f;
+    background: #fff5f5; /* light maroon tint */
+    border: 1px solid #800000;
     padding: 10px;
     border-radius: 10px;
     text-align: center;
@@ -40,24 +59,45 @@ input, textarea {
 
 .item img {
     width: 100%;
-    height: 100px;
+    height: 110px;
     object-fit: cover;
+    border-radius: 8px;
 }
 
+/* BUTTON */
 button {
     width: 100%;
     padding: 12px;
-    background: gold;
+    background: #800000; /* maroon */
+    color: white;
     border: none;
-    font-weight: bold;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
+button:hover {
+    background: #a00000;
+}
+
+/* SUMMARY */
 #summary {
     margin-top: 15px;
-    background: #0b2f23;
+    background: #fff5f5;
     padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #800000;
 }
 
+/* PAYMENT BOX */
 .hidden {
     display: none;
+}
+
+#bankBox {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px dashed #800000;
+    background: #fffafa;
 }
