@@ -10,86 +10,72 @@ const supabaseClient = supabase.createClient(
 // ================= PAYMENT TOGGLE =================
 document.querySelectorAll('input[name="payment"]').forEach(radio => {
 radio.addEventListener("change", function () {
-document.getElementById("bankBox").classList.toggle("hidden", this.value !== "Bank");
+
+let bankBox = document.getElementById("bankBox");
+
+if (this.value === "Bank") {
+bankBox.classList.remove("hidden");
+} else {
+bankBox.classList.add("hidden");
+}
 });
 });
 
-// ================= CALCULATE =================
 function calculateOrder() {
-
-let total =
-(Number(jollof.value) * 12) +
-(Number(fried.value) * 13) +
-(Number(yam.value) * 18) +
-(Number(eba.value) * 15) +
-(Number(suya.value) * 10) +
-(Number(moi.value) * 5) +
-(Number(puff.value) * 4) +
-(Number(chin.value) * 6);
-
-document.getElementById("summary").innerHTML = `
-<h3>Order Summary</h3>
-<p>Total: RM ${total.toFixed(2)}</p>
-`;
-}
-
-// ================= UPLOAD FILE =================
-async function uploadReceipt(file) {
-
-const fileName = Date.now() + "-" + file.name;
-
-const { data, error } = await supabaseClient.storage
-.from("receipts")
-.upload(fileName, file);
-
-if (error) {
-console.log(error);
-return null;
-}
-
-return data.path;
-}
-
-// ================= SUBMIT ORDER =================
-async function submitOrder() {
 
 let name = document.getElementById("name").value;
 let phone = document.getElementById("phone").value;
-let address = document.getElementById("address").value;
-let payment = document.querySelector('input[name="payment"]:checked').value;
-let receiptFile = document.getElementById("receipt").files[0];
 
-if (!name || !phone || !address) {
-alert("Fill all details");
+let jollof = Number(document.getElementById("jollof").value);
+let fried = Number(document.getElementById("fried").value);
+let yam = Number(document.getElementById("yam").value);
+let eba = Number(document.getElementById("eba").value);
+let suya = Number(document.getElementById("suya").value);
+let moi = Number(document.getElementById("moi").value);
+let puff = Number(document.getElementById("puff").value);
+let chin = Number(document.getElementById("chin").value);
+
+if (!name || !phone) {
+alert("Please fill customer details");
 return;
 }
 
-let receiptPath = null;
+let total =
+(jollof * 12) +
+(fried * 13) +
+(yam * 18) +
+(eba * 15) +
+(suya * 10) +
+(moi * 5) +
+(puff * 4) +
+(chin * 6);
+
+if (total <= 0) {
+alert("Select at least one food item");
+return;
+}
+
+let payment = document.querySelector('input[name="payment"]:checked').value;
+
+let receiptMsg = "";
 
 if (payment === "Bank") {
-if (!receiptFile) {
-alert("Upload receipt");
+let receipt = document.getElementById("receipt").files[0];
+
+if (!receipt) {
+alert("Please upload receipt");
 return;
 }
 
-receiptPath = await uploadReceipt(receiptFile);
+receiptMsg = "Receipt: " + receipt.name;
 }
 
-const { error } = await supabaseClient.from("orders").insert([
-{
-customer_name: name,
-phone: phone,
-address: address,
-payment_method: payment,
-receipt: receiptPath
-}
-]);
-
-if (error) {
-alert("Error saving order");
-console.log(error);
-return;
-}
-
-document.getElementById("thankYou").classList.remove("hidden");
+document.getElementById("summary").innerHTML = `
+<h3>Order Summary</h3>
+<p>Name: ${name}</p>
+<p>Phone: ${phone}</p>
+<p>Total: RM ${total.toFixed(2)}</p>
+<p>Payment: ${payment}</p>
+<p>${receiptMsg}</p>
+`;
 }
