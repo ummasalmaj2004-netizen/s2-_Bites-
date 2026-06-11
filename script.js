@@ -1,5 +1,4 @@
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>                                                                                                                                                                     // PAYMENT TOGGLE
+                                                                                                                                                                   // PAYMENT TOGGLE
 document.querySelectorAll('input[name="payment"]').forEach(radio => {
     radio.addEventListener("change", function () {
         const bankBox = document.getElementById("bankBox");
