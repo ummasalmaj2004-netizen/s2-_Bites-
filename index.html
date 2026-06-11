@@ -14,24 +14,22 @@
 <h1>🍽️ Naija Bites</h1>
 <p>Authentic Nigerian Food Ordering System</p>
 
-<!-- CUSTOMER -->
 <h2>Customer Details</h2>
 <input type="text" id="name" placeholder="Full Name">
 <input type="tel" id="phone" placeholder="Phone Number">
 <textarea id="address" placeholder="Delivery Address"></textarea>
 
-<!-- MENU -->
 <h2>Menu</h2>
 
 <div class="menu">
 <div class="item">
-<img src="images/jollof-rice.jpg">
+<img src="images/jallof-rice.png">
 <p>Jollof Rice (RM12)</p>
 <input type="number" id="jollof" value="0" min="0">
 </div>
 
 <div class="item">
-<img src="images/fried-rice.jpg">
+<img src="images/fried-rice.png">
 <p>Fried Rice (RM13)</p>
 <input type="number" id="fried" value="0" min="0">
 </div>
@@ -73,12 +71,10 @@
 </div>
 </div>
 
-<!-- CALCULATE -->
 <button onclick="calculateOrder()">Calculate Order</button>
 
 <div id="summary"></div>
 
-<!-- PAYMENT -->
 <h2>Payment Method</h2>
 
 <label><input type="radio" name="payment" value="COD" checked> Cash on Delivery</label>
@@ -86,18 +82,16 @@
 
 <div id="bankBox" class="hidden">
 <p><b>Bank:</b> Maybank</p>
-<p><b>Account:</b> Naija Bites</p>
+<p><b>Account Name:</b> Naija Bites</p>
 <p><b>Account No:</b> 1234567890</p>
 
 <input type="file" id="receipt">
 </div>
 
-<!-- SUBMIT LAST -->
 <div class="submit-area">
 <button onclick="submitOrder()">Submit Order</button>
 </div>
 
-<!-- THANK YOU -->
 <div id="thankYou" class="hidden">
 <h2>🎉 Thank you for your order!</h2>
 <p>We will contact you soon.</p>
