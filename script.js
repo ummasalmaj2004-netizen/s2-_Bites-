@@ -16,9 +16,9 @@ radio.addEventListener("change", function () {
 let bankBox = document.getElementById("bankBox");
 
 if (this.value === "Bank") {
-bankBox.style.display = "block";
+bankBox.classList.remove("hidden");
 } else {
-bankBox.style.display = "none";
+bankBox.classList.add("hidden");
 }
 });
 });
@@ -64,21 +64,29 @@ document.getElementById("summary").innerHTML = `
 <h3>Order Summary</h3>
 <p>Name: ${name}</p>
 <p>Phone: ${phone}</p>
-<p>Total: RM ${total.toFixed(2)}</p>
 <p>Payment: ${payment}</p>
+<p>Total: RM ${total.toFixed(2)}</p>
 `;
 }
 
-// SUBMIT ORDER
+// SUBMIT ORDER (THANK YOU BELOW BUTTON)
 function submitOrder() {
 
-document.getElementById("summary").innerHTML = `
-<h2 style="color:green;">🎉 Thank You!</h2>
-<p>Your order has been placed successfully.</p>
-<p>We will contact you soon.</p>
-`;
+let payment = document.querySelector('input[name="payment"]:checked').value;
 
-// RESET
+if (payment === "Bank") {
+let receipt = document.getElementById("receipt").files[0];
+
+if (!receipt) {
+alert("Please upload receipt");
+return;
+}
+}
+
+document.getElementById("thankYou").innerHTML =
+"🎉 Thank You! Your order has been placed successfully.";
+
+// RESET FORM
 document.getElementById("name").value = "";
 document.getElementById("phone").value = "";
 document.getElementById("address").value = "";
