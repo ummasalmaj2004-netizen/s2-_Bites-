@@ -1,5 +1,5 @@
 body {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background: #ffffff;
     margin: 0;
     padding: 20px;
@@ -31,20 +31,22 @@ input, textarea {
     margin: 5px 0;
     border: 1px solid #800000;
     border-radius: 6px;
+    outline: none;
 }
 
 .menu {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 10px;
+    margin-top: 10px;
 }
 
 .item {
     border: 1px solid #800000;
     padding: 10px;
     border-radius: 10px;
-    background: #fff5f5;
     text-align: center;
+    background: #fff5f5;
 }
 
 .item img {
@@ -63,6 +65,7 @@ button {
     margin-top: 10px;
     border-radius: 6px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 button:hover {
@@ -74,12 +77,14 @@ button:hover {
     padding: 10px;
     border: 1px solid #800000;
     background: #fff5f5;
+    border-radius: 8px;
 }
 
 .hidden {
     display: none;
 }
 
+/* PAYMENT BOX */
 #bankBox {
     margin-top: 10px;
     padding: 10px;
@@ -87,10 +92,13 @@ button:hover {
     background: #fffafa;
 }
 
-#thankYou {
-    margin-top: 15px;
-    padding: 15px;
-    background: #fff5f5;
-    border: 2px solid #800000;
-    text-align: center;
+/* SUBMIT BUTTON RIGHT ALIGN */
+.submit-area {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.submit-area button {
+    width: 180px;
 }
