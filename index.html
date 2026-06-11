@@ -1,121 +1,87 @@
- <!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naija Bites Food Ordering System</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naija Bites</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
 
-```
-<h1>🍽️ Naija Bites</h1>
-<p>Delicious Nigerian Meals Delivered To Your Doorstep</p>
+    <h1>🍽️ Naija Bites</h1>
+    <p class="tagline">Authentic Nigerian Food Ordering System</p>
 
-<h2>Customer Information</h2>
+    <!-- CUSTOMER INFO -->
+    <h2>Customer Details</h2>
 
-<input type="text" id="name" placeholder="Full Name">
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="tel" id="phone" placeholder="Phone Number">
+    <textarea id="address" placeholder="Delivery Address"></textarea>
 
-<input type="tel" id="phone" placeholder="Phone Number">
+    <!-- MENU -->
+    <h2>Menu</h2>
 
-<textarea id="address" placeholder="Delivery Address"></textarea>
+    <div class="menu">
 
-<h2>Payment Method</h2>
+        <div class="item">
+            <img src="images/jallof-rice.png">
+            <p>Jollof Rice (RM12)</p>
+            <input type="number" id="jollof" min="0" value="0">
+        </div>
+      <div class="item">
+            <img src="images/jfried-rice.png">
+            <p>Fried Rice (RM15)</p>
+            <input type="number" id="fried" min="0" value="0">
+        </div>
+        <div class="item">
+            <img src="images/suya.jpg">
+            <p>Suya (RM10)</p>
+            <input type="number" id="suya" min="0" value="0">
+        </div>
+   <div class="item">
+            <img src="images/chin-chin.jpg">
+            <p>Chin Chin (RM12)</p>
+            <input type="number" id="chin" min="0" value="0">
+        </div>
+        <div class="item">
+            <img src="images/puff-puff.jpg">
+            <p>Puff Puff (RM4)</p>
+            <input type="number" id="puff" min="0" value="0">
+        </div>
 
-<label>
-    <input type="radio" name="payment" value="Cash on Delivery" checked>
-    Cash on Delivery
-</label>
-
-<label>
-    <input type="radio" name="payment" value="Bank Transfer">
-    Bank Transfer
-</label>
-
-<div id="bankInfo" style="display:none;">
-    <h3>Bank Transfer Details</h3>
-    <p><strong>Bank:</strong> Maybank</p>
-    <p><strong>Account Name:</strong> Naija Bites</p>
-    <p><strong>Account Number:</strong> 1234567890</p>
-</div>
-
-<h2>Menu</h2>
-
-<div class="menu">
-
-    <div class="item">
-        <img src="images/jollof-rice.jpg" alt="Jollof Rice">
-        <h3>Jollof Rice</h3>
-        <p>RM12.00</p>
-        <input type="number" id="jollof" min="0" value="0">
     </div>
 
-    <div class="item">
-        <img src="images/fried-rice.jpg" alt="Fried Rice">
-        <h3>Fried Rice</h3>
-        <p>RM13.00</p>
-        <input type="number" id="fried" min="0" value="0">
-    </div>
+    <!-- CALCULATE -->
+    <button onclick="calculateOrder()">Calculate Order</button>
 
-    <div class="item">
-        <img src="images/pounded-yam-egusi.jpg" alt="Pounded Yam & Egusi">
-        <h3>Pounded Yam & Egusi</h3>
-        <p>RM18.00</p>
-        <input type="number" id="yam" min="0" value="0">
-    </div>
+    <div id="summary"></div>
 
-    <div class="item">
-        <img src="images/eba-okra.jpg" alt="Eba & Okra Soup">
-        <h3>Eba & Okra Soup</h3>
-        <p>RM15.00</p>
-        <input type="number" id="eba" min="0" value="0">
-    </div>
+    <!-- PAYMENT -->
+    <h2>Payment Method (Last Step)</h2>
 
-    <div class="item">
-        <img src="images/suya.jpg" alt="Suya">
-        <h3>Suya</h3>
-        <p>RM10.00</p>
-        <input type="number" id="suya" min="0" value="0">
-    </div>
+    <label>
+        <input type="radio" name="payment" value="COD" checked>
+        Cash on Delivery
+    </label>
 
-    <div class="item">
-        <img src="images/moi-moi.jpg" alt="Moi Moi">
-        <h3>Moi Moi</h3>
-        <p>RM5.00</p>
-        <input type="number" id="moi" min="0" value="0">
-    </div>
+    <label>
+        <input type="radio" name="payment" value="Bank">
+        Bank Transfer
+    </label>
 
-    <div class="item">
-        <img src="images/puff-puff.jpg" alt="Puff Puff">
-        <h3>Puff Puff</h3>
-        <p>RM4.00</p>
-        <input type="number" id="puff" min="0" value="0">
-    </div>
+    <div id="bankBox" class="hidden">
+        <p><b>Bank:</b> Maybank</p>
+        <p><b>Account:</b> Naija Bites</p>
+        <p><b>Account No:</b> 1234567890</p>
 
-    <div class="item">
-        <img src="images/chin-chin.jpg" alt="Chin Chin">
-        <h3>Chin Chin</h3>
-        <p>RM6.00</p>
-        <input type="number" id="chin" min="0" value="0">
+        <input type="file" id="receipt">
     </div>
 
 </div>
-
-<button onclick="calculateOrder()">
-    Submit Order
-</button>
-
-<div id="summary"></div>
-```
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="script.js"></script>
-
 </body>
 </html>
