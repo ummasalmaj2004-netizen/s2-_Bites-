@@ -1,4 +1,4 @@
-// ================= SUPABASE SETUP =================
+// ================= SUPABASE =================
 const SUPABASE_URL = "https://azqkjbfctblxzvjeroam.supabase.co";
 
 const SUPABASE_ANON_KEY = "sb_publishable_y5XJvIjhtTMqBPkqGbvPYA_w-nmk1zG";
@@ -11,7 +11,6 @@ const supabaseClient = supabase.createClient(
 // ================= PAYMENT TOGGLE =================
 document.querySelectorAll('input[name="payment"]').forEach(radio => {
     radio.addEventListener("change", function () {
-
         const bankBox = document.getElementById("bankBox");
 
         if (this.value === "Bank") {
@@ -22,7 +21,7 @@ document.querySelectorAll('input[name="payment"]').forEach(radio => {
     });
 });
 
-// ================= CALCULATE ORDER =================
+// ================= CALCULATE =================
 function calculateOrder() {
 
     let name = document.getElementById("name").value;
@@ -38,7 +37,7 @@ function calculateOrder() {
     let chin = Number(document.getElementById("chin").value);
 
     if (!name || !phone) {
-        alert("Please fill customer details");
+        alert("Fill customer details");
         return;
     }
 
@@ -65,35 +64,32 @@ function calculateOrder() {
         let receipt = document.getElementById("receipt").files[0];
 
         if (!receipt) {
-            alert("Please upload receipt");
+            alert("Upload receipt");
             return;
         }
 
-        receiptMsg = "Receipt: " + receipt.name;
+        receiptMsg = receipt.name;
     }
 
     document.getElementById("summary").innerHTML = `
         <h3>Order Summary</h3>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Phone:</b> ${phone}</p>
-        <p><b>Total:</b> RM ${total.toFixed(2)}</p>
-        <p><b>Payment:</b> ${payment}</p>
-        <p>${receiptMsg}</p>
+        <p>Name: ${name}</p>
+        <p>Phone: ${phone}</p>
+        <p>Total: RM ${total.toFixed(2)}</p>
+        <p>Payment: ${payment}</p>
     `;
 }
 
-// ================= SUBMIT ORDER =================
-function submitOrder() {
+// ================= SUBMIT + SAVE TO SUPABASE =================
+async function submitOrder() {
 
     let name = document.getElementById("name").value;
     let phone = document.getElementById("phone").value;
+    let address = document.getElementById("address").value;
 
-    if (!name || !phone) {
-        alert("Please fill customer details first");
-        return;
-    }
+    let payment = document.querySelector('input[name="payment"]:checked').value;
 
-    document.getElementById("thankYou").classList.remove("hidden");
-
-    document.getElementById("summary").innerHTML = "";
-}
+    let { error } = await supabaseClient.from("orders").insert([
+        {
+            customer_name: name,
+            phone: phone
