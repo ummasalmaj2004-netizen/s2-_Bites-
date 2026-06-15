@@ -1,98 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naija Bites</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<div class="card">
+    <h2>Food Menu</h2>
 
-<body>
+    <div class="food-item">
+        <img src="images/jallof-rice.png" alt="Jollof Rice">
+        <div>
+            <label>
+                <input type="checkbox" class="food" data-name="Jollof Rice" data-price="12">
+                Jollof Rice (RM12)
+            </label>
+            <input type="number" id="qty1" min="1" placeholder="Quantity">
+        </div>
+    </div>
 
-<div class="container">
+    <div class="food-item">
+        <img src="images/pounded-yam.jpg" alt="Pounded Yam">
+        <div>
+            <label>
+                <input type="checkbox" class="food" data-name="Pounded Yam" data-price="18">
+                Pounded Yam (RM18)
+            </label>
+            <input type="number" id="qty2" min="1" placeholder="Quantity">
+        </div>
+    </div>
 
-<h1>🍽️ Naija Bites</h1>
-<p>Authentic Nigerian Food Ordering System</p>
+    <div class="food-item">
+        <img src="images/puff-puff.jpg" alt="Puff Puff">
+        <div>
+            <label>
+                <input type="checkbox" class="food" data-name="Puff Puff" data-price="5">
+                Puff Puff (RM5)
+            </label>
+            <input type="number" id="qty4" min="1" placeholder="Quantity">
+        </div>
+    </div>
 
-<h2>Customer Details</h2>
+    <div class="food-item">
+        <img src="images/chin-chin.jpg" alt="Chin Chin">
+        <div>
+            <label>
+                <input type="checkbox" class="food" data-name="Chin Chin" data-price="6">
+                Chin Chin (RM6)
+            </label>
+            <input type="number" id="qty5" min="1" placeholder="Quantity">
+        </div>
+    </div>
 
-<input type="text" id="name" placeholder="Full Name">
-<input type="tel" id="phone" placeholder="Phone Number">
-<textarea id="address" placeholder="Delivery Address"></textarea>
+    <div class="food-item">
+        <img src="images/suya.jpg" alt="Suya">
+        <div>
+            <label>
+                <input type="checkbox" class="food" data-name="Suya" data-price="10">
+                Suya (RM10)
+            </label>
+            <input type="number" id="qty6" min="1" placeholder="Quantity">
+        </div>
+    </div>
 
-<h2>Menu</h2>
+    <div class="food-item">
+        <img src="images/fried-rice.png" alt="Fried Rice">
+        <div>
+            <label>
+                <input type="checkbox" class="food" data-name="Fried Rice" data-price="10">
+                Fried Rice (RM10)
+            </label>
+            <input type="number" id="qty7" min="1" placeholder="Quantity">
+        </div>
+    </div>
 
-<div class="menu">
-
-<div class="item">
-<img src="images/jallof-rice.png">
-<p>Jollof Rice (RM12)</p>
-<input type="number" id="jollof" value="0">
+    <button onclick="calculateTotal()">Calculate Total</button>
 </div>
-
-<div class="item">
-<img src="images/fried-rice.png">
-<p>Fried Rice (RM13)</p>
-<input type="number" id="fried" value="0">
-</div>
-
-<div class="item">
-<img src="images/pounded-yam-egusi.jpg">
-<p>Pounded Yam & Egusi (RM18)</p>
-<input type="number" id="yam" value="0">
-</div>
-
-<div class="item">
-<img src="images/eba-okra.jpg">
-<p>Eba & Okra (RM15)</p>
-<input type="number" id="eba" value="0">
-</div>
-
-<div class="item">
-<img src="images/suya.jpg">
-<p>Suya (RM10)</p>
-<input type="number" id="suya" value="0">
-</div>
-
-<div class="item">
-<img src="images/moi-moi.jpg">
-<p>Moi Moi (RM5)</p>
-<input type="number" id="moi" value="0">
-</div>
-
-<div class="item">
-<img src="images/puff-puff.jpg">
-<p>Puff Puff (RM4)</p>
-<input type="number" id="puff" value="0">
-</div>
-
-<div class="item">
-<img src="images/chin-chin.jpg">
-<p>Chin Chin (RM6)</p>
-<input type="number" id="chin" value="0">
-</div>
-
-</div>
-
-<!-- PAYMENT -->
-<h2>Payment Method</h2>
-
-<label>
-<input type="radio" name="payment" value="COD" checked>
-Cash on Delivery
-</label>
-
-
-<button onclick="calculateOrder()">Calculate Order</button>
-
-<div id="summary"></div>
-
-<button onclick="submitOrder()">Submit Order</button>
-
-<div id="thankYou"></div>
-
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
