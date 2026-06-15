@@ -1,89 +1,135 @@
-// ================= SUPABASE =================
-const SUPABASE_URL = "https://azqkjbfctblxzvjeroam.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_y5XJvIjhtTMqBPkqGbvPYA_w-nmk1zG";
+let finalSummary = "";
+let finalTotal = 0;
 
-const supabaseClient = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-);
+function calculateTotal() {
 
-// ================= PAYMENT TOGGLE =================
-// BANK TOGGLE (FIXED)
-// BANK TOGGLE (put this at TOP or BOTTOM of script.js)
-document.querySelectorAll('input[name="payment"]').forEach(radio => {
-    radio.onchange = function () {
-        document.getElementById("bankBox").style.display =
-            this.value === "Bank" ? "block" : "none";
-    };
-});
+    const foods = document.querySelectorAll(".food");
 
-// CALCULATE ORDER
-function calculateOrder() {
+    let subtotal = 0;
+    let summary = "";
 
-let name = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
+    let selected = false;
 
-let jollof = Number(document.getElementById("jollof").value);
-let fried = Number(document.getElementById("fried").value);
-let yam = Number(document.getElementById("yam").value);
-let eba = Number(document.getElementById("eba").value);
-let suya = Number(document.getElementById("suya").value);
-let moi = Number(document.getElementById("moi").value);
-let puff = Number(document.getElementById("puff").value);
-let chin = Number(document.getElementById("chin").value);
+    foods.forEach((food, index) => {
 
-if (!name || !phone) {
-alert("Fill customer details");
-return;
+        if(food.checked){
+
+            selected = true;
+
+            const qtyInput = document.getElementById(`qty${index+1}`);
+
+            let qty = parseInt(qtyInput.value);
+
+            if(isNaN(qty) || qty <= 0){
+                alert("Please enter valid quantity.");
+                return;
+            }
+
+            const name = food.dataset.name;
+            const price = parseFloat(food.dataset.price);
+
+            const itemTotal = qty * price;
+
+            subtotal += itemTotal;
+
+            summary += `${name} x ${qty} = RM${itemTotal.toFixed(2)}<br>`;
+        }
+    });
+
+    if(!selected){
+        alert("Please select at least one food item.");
+        return;
+    }
+
+    const sst = subtotal * 0.06;
+    const total = subtotal + sst;
+
+    summary += "<hr>";
+    summary += `Subtotal = RM${subtotal.toFixed(2)}<br>`;
+    summary += `SST (6%) = RM${sst.toFixed(2)}<br>`;
+    summary += `<strong>Total = RM${total.toFixed(2)}</strong>`;
+
+    document.getElementById("summary").innerHTML = summary;
+
+    finalSummary = summary;
+    finalTotal = total;
+
+    localStorage.setItem("orderSummary", summary);
 }
 
-let total =
-(jollof * 12) +
-(fried * 13) +
-(yam * 18) +
-(eba * 15) +
-(suya * 10) +
-(moi * 5) +
-(puff * 4) +
-(chin * 6);
+function submitOrder(){
 
-if (total <= 0) {
-alert("Select food items");
-return;
+    const name = document.getElementById("customerName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    if(name === "" || phone === "" || address === ""){
+        alert("Please complete all customer information.");
+        return;
+    }
+
+    if(isNaN(phone)){
+        alert("Phone number must be numeric.");
+        return;
+    }
+
+    const paymentMethod =
+        document.querySelector('input[name="payment"]:checked');
+
+    if(paymentMethod === null){
+        alert("Please select payment method.");
+        return;
+    }
+
+    if(finalTotal === 0){
+        alert("Please calculate your order first.");
+        return;
+    }
+
+    alert("Thank you, your order has been placed!");
+
+    const receipt = `
+        <div class="receipt-box">
+            <h3>Order Receipt</h3>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Address:</strong> ${address}</p>
+            <p><strong>Payment:</strong> ${paymentMethod.value}</p>
+            <hr>
+            ${finalSummary}
+        </div>
+    `;
+
+    document.getElementById("receipt").innerHTML = receipt;
 }
 
-let payment = document.querySelector('input[name="payment"]:checked').value;
+function resetForm(){
 
-document.getElementById("summary").innerHTML = `
-<h3>Order Summary</h3>
-<p>Name: ${name}</p>
-<p>Phone: ${phone}</p>
-<p>Payment: ${payment}</p>
-<p>Total: RM ${total.toFixed(2)}</p>
-`;
+    document.querySelectorAll("input").forEach(input=>{
+
+        if(input.type === "checkbox" || input.type === "radio"){
+            input.checked = false;
+        }else{
+            input.value = "";
+        }
+    });
+
+    document.getElementById("address").value = "";
+
+    document.getElementById("summary").innerHTML = "";
+    document.getElementById("receipt").innerHTML = "";
+
+    finalSummary = "";
+    finalTotal = 0;
+
+    localStorage.clear();
 }
 
-// SUBMIT ORDER
-function submitOrder() {
+window.onload = function(){
 
-let payment = document.querySelector('input[name="payment"]:checked').value;
+    const savedOrder = localStorage.getItem("orderSummary");
 
-if (payment === "Bank") {
-let receipt = document.getElementById("receipt").files[0];
-
-return;
-}
-}
-
-document.getElementById("thankYou").innerHTML =
-"🎉 Thank You! Your order has been placed successfully.";
-
-// RESET
-document.getElementById("name").value = "";
-document.getElementById("phone").value = "";
-document.getElementById("address").value = "";
-
-document.querySelectorAll('input[type="number"]').forEach(i => i.value = 0);
-
-document.getElementById("receipt").value = "";
-}
+    if(savedOrder){
+        document.getElementById("summary").innerHTML = savedOrder;
+    }
+};
