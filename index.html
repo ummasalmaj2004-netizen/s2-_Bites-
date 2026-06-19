@@ -1,71 +1,87 @@
-<div class="card">
-    <h2>Food Menu</h2>
-
-    <div class="food-item">
-        <img src="images/jallof-rice.png" alt="Jollof Rice">
-        <div>
-            <label>
-                <input type="checkbox" class="food" data-name="Jollof Rice" data-price="12">
-                Jollof Rice (RM12)
-            </label>
-            <input type="number" id="qty1" min="1" placeholder="Quantity">
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Naija Bites — Online Food Order Calculator</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="brand">🍲 Naija Bites</h1>
+      <p class="tagline">Authentic Nigerian flavors — order online</p>
     </div>
+  </header>
 
-    <div class="food-item">
-        <img src="images/pounded-yam.jpg" alt="Pounded Yam">
-        <div>
-            <label>
-                <input type="checkbox" class="food" data-name="Pounded Yam" data-price="18">
-                Pounded Yam (RM18)
-            </label>
-            <input type="number" id="qty2" min="1" placeholder="Quantity">
+  <main class="container main-grid">
+    <!-- MENU -->
+    <section class="menu-section">
+      <h2>Our Menu</h2>
+      <div id="menu" class="menu-grid"></div>
+    </section>
+
+    <!-- ORDER FORM -->
+    <aside class="order-section">
+      <h2>Your Order</h2>
+      <div id="cart" class="cart"></div>
+
+      <div class="totals">
+        <div class="row"><span>Subtotal</span><span id="subtotal">RM 0.00</span></div>
+        <div class="row"><span>Delivery</span><span id="delivery">RM 5.00</span></div>
+        <div class="row total"><span>Total</span><span id="total">RM 5.00</span></div>
+      </div>
+
+      <form id="orderForm" novalidate>
+        <h3>Customer Details</h3>
+        <label>Full Name
+          <input type="text" id="name" placeholder="e.g. Ahmad Bello" />
+          <small class="error" data-for="name"></small>
+        </label>
+        <label>Phone Number
+          <input type="tel" id="phone" placeholder="e.g. 012-3456789" />
+          <small class="error" data-for="phone"></small>
+        </label>
+        <label>Delivery Address
+          <textarea id="address" rows="2" placeholder="House no, street, city"></textarea>
+          <small class="error" data-for="address"></small>
+        </label>
+
+        <h3>Payment Method</h3>
+        <div class="pay-toggle">
+          <label><input type="radio" name="payment" value="cash" checked /> Cash on Delivery</label>
+          <label><input type="radio" name="payment" value="bank" /> Bank Transfer</label>
         </div>
-    </div>
 
-    <div class="food-item">
-        <img src="images/puff-puff.jpg" alt="Puff Puff">
-        <div>
-            <label>
-                <input type="checkbox" class="food" data-name="Puff Puff" data-price="5">
-                Puff Puff (RM5)
-            </label>
-            <input type="number" id="qty4" min="1" placeholder="Quantity">
+        <div id="bankBox" class="bank-box hidden">
+          <p><strong>Maybank</strong> • 123456789012 • Naija Bites Sdn Bhd</p>
+          <label>Upload Payment Receipt
+            <input type="file" id="receipt" accept="image/*" />
+            <small class="error" data-for="receipt"></small>
+          </label>
+          <img id="receiptPreview" class="receipt-preview hidden" alt="Receipt preview" />
         </div>
-    </div>
 
-    <div class="food-item">
-        <img src="images/chin-chin.jpg" alt="Chin Chin">
-        <div>
-            <label>
-                <input type="checkbox" class="food" data-name="Chin Chin" data-price="6">
-                Chin Chin (RM6)
-            </label>
-            <input type="number" id="qty5" min="1" placeholder="Quantity">
-        </div>
-    </div>
+        <button type="button" id="calcBtn" class="btn btn-secondary">Calculate Total</button>
+        <button type="submit" id="submitBtn" class="btn btn-primary">Submit Order</button>
+      </form>
+    </aside>
+  </main>
 
-    <div class="food-item">
-        <img src="images/suya.jpg" alt="Suya">
-        <div>
-            <label>
-                <input type="checkbox" class="food" data-name="Suya" data-price="10">
-                Suya (RM10)
-            </label>
-            <input type="number" id="qty6" min="1" placeholder="Quantity">
-        </div>
+  <!-- THANK YOU -->
+  <div id="thankYou" class="thank-you hidden">
+    <div class="card">
+      <h2>🎉 Thank You for Your Order!</h2>
+      <p>We appreciate your business. Your delicious food is being prepared.</p>
+      <div id="receiptSummary"></div>
+      <button id="newOrderBtn" class="btn btn-primary">Place Another Order</button>
     </div>
+  </div>
 
-    <div class="food-item">
-        <img src="images/fried-rice.png" alt="Fried Rice">
-        <div>
-            <label>
-                <input type="checkbox" class="food" data-name="Fried Rice" data-price="10">
-                Fried Rice (RM10)
-            </label>
-            <input type="number" id="qty7" min="1" placeholder="Quantity">
-        </div>
-    </div>
+  <footer class="site-footer">
+    <p>© 2026 Naija Bites. All rights reserved.</p>
+  </footer>
 
-    <button onclick="calculateTotal()">Calculate Total</button>
-</div>
+  <script src="j.script.js"></script>
+</body>
+</html>
