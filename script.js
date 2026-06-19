@@ -1,11 +1,11 @@
 // ===== Menu Data =====
 const MENU = [
-  { id: 'jollof',     name: 'Jollof Rice',          price: 12.00, img: '/images/jallof-rice.png' },
-  { id: 'fried',      name: 'Fried Rice',           price: 12.00, img: '/images/fried-rice.png' },
-  { id: 'pounded',    name: 'Pounded Yam & Egusi',  price: 15.00, img: '/images/pounded-yam.jpg' },
-  { id: 'suya',       name: 'Suya',                 price: 14.00, img: '/images/suya.jpg' },
-  { id: 'puff',       name: 'Puff Puff',            price:  4.00, img: '/images/puff-puff.jpg' },
-  { id: 'chin',       name: 'Chin Chin',            price:  5.00, img: '/images/chin-chin.jpg' },
+  { id: 'jollof',     name: 'Jollof Rice',          price: 12.00, img: 'images/jallof-rice.png' },
+  { id: 'fried',      name: 'Fried Rice',           price: 12.00, img: 'images/fried-rice.png' },
+  { id: 'pounded',    name: 'Pounded Yam & Egusi',  price: 15.00, img: 'images/pounded-yam.jpg' },
+  { id: 'suya',       name: 'Suya',                 price: 14.00, img: 'images/suya.jpg' },
+  { id: 'puff',       name: 'Puff Puff',            price:  4.00, img: 'images/puff-puff.jpg' },
+  { id: 'chin',       name: 'Chin Chin',            price:  5.00, img: 'images/chin-chin.jpg' },
 ];
 
 const DELIVERY = 5.00;
