@@ -1,135 +1,173 @@
-let finalSummary = "";
-let finalTotal = 0;
+// ===== Menu Data =====
+const MENU = [
+  { id: 'jollof',     name: 'Jollof Rice',          price: 12.00, img: '/images/jallof-rice.png' },
+  { id: 'fried',      name: 'Fried Rice',           price: 12.00, img: '/images/fried-rice.png' },
+  { id: 'pounded',    name: 'Pounded Yam & Egusi',  price: 15.00, img: '/images/pounded-yam.jpg' },
+  { id: 'suya',       name: 'Suya',                 price: 14.00, img: '/images/suya.jpg' },
+  { id: 'puff',       name: 'Puff Puff',            price:  4.00, img: '/images/puff-puff.jpg' },
+  { id: 'chin',       name: 'Chin Chin',            price:  5.00, img: '/images/chin-chin.jpg' },
+];
 
-function calculateTotal() {
+const DELIVERY = 5.00;
+const cart = {}; // { id: qty }
 
-    const foods = document.querySelectorAll(".food");
+// ===== Helpers =====
+const RM = n => 'RM ' + n.toFixed(2);
+const $ = sel => document.querySelector(sel);
 
-    let subtotal = 0;
-    let summary = "";
-
-    let selected = false;
-
-    foods.forEach((food, index) => {
-
-        if(food.checked){
-
-            selected = true;
-
-            const qtyInput = document.getElementById(`qty${index+1}`);
-
-            let qty = parseInt(qtyInput.value);
-
-            if(isNaN(qty) || qty <= 0){
-                alert("Please enter valid quantity.");
-                return;
-            }
-
-            const name = food.dataset.name;
-            const price = parseFloat(food.dataset.price);
-
-            const itemTotal = qty * price;
-
-            subtotal += itemTotal;
-
-            summary += `${name} x ${qty} = RM${itemTotal.toFixed(2)}<br>`;
-        }
-    });
-
-    if(!selected){
-        alert("Please select at least one food item.");
-        return;
-    }
-
-    const sst = subtotal * 0.06;
-    const total = subtotal + sst;
-
-    summary += "<hr>";
-    summary += `Subtotal = RM${subtotal.toFixed(2)}<br>`;
-    summary += `SST (6%) = RM${sst.toFixed(2)}<br>`;
-    summary += `<strong>Total = RM${total.toFixed(2)}</strong>`;
-
-    document.getElementById("summary").innerHTML = summary;
-
-    finalSummary = summary;
-    finalTotal = total;
-
-    localStorage.setItem("orderSummary", summary);
-}
-
-function submitOrder(){
-
-    const name = document.getElementById("customerName").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const address = document.getElementById("address").value.trim();
-
-    if(name === "" || phone === "" || address === ""){
-        alert("Please complete all customer information.");
-        return;
-    }
-
-    if(isNaN(phone)){
-        alert("Phone number must be numeric.");
-        return;
-    }
-
-    const paymentMethod =
-        document.querySelector('input[name="payment"]:checked');
-
-    if(paymentMethod === null){
-        alert("Please select payment method.");
-        return;
-    }
-
-    if(finalTotal === 0){
-        alert("Please calculate your order first.");
-        return;
-    }
-
-    alert("Thank you, your order has been placed!");
-
-    const receipt = `
-        <div class="receipt-box">
-            <h3>Order Receipt</h3>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Phone:</strong> ${phone}</p>
-            <p><strong>Address:</strong> ${address}</p>
-            <p><strong>Payment:</strong> ${paymentMethod.value}</p>
-            <hr>
-            ${finalSummary}
+// ===== Render Menu =====
+function renderMenu() {
+  const wrap = $('#menu');
+  wrap.innerHTML = MENU.map(item => `
+    <div class="food-card">
+      <img src="${item.img}" alt="${item.name}" onerror="this.style.display='none'" />
+      <div class="food-card-body">
+        <h4>${item.name}</h4>
+        <div class="price">${RM(item.price)}</div>
+        <div class="qty-control">
+          <button type="button" onclick="changeQty('${item.id}', -1)">−</button>
+          <input type="number" min="0" max="20" value="0" id="qty-${item.id}"
+                 onchange="setQty('${item.id}', this.value)" />
+          <button type="button" onclick="changeQty('${item.id}', 1)">+</button>
         </div>
-    `;
-
-    document.getElementById("receipt").innerHTML = receipt;
+      </div>
+    </div>
+  `).join('');
 }
 
-function resetForm(){
-
-    document.querySelectorAll("input").forEach(input=>{
-
-        if(input.type === "checkbox" || input.type === "radio"){
-            input.checked = false;
-        }else{
-            input.value = "";
-        }
-    });
-
-    document.getElementById("address").value = "";
-
-    document.getElementById("summary").innerHTML = "";
-    document.getElementById("receipt").innerHTML = "";
-
-    finalSummary = "";
-    finalTotal = 0;
-
-    localStorage.clear();
+function changeQty(id, delta) {
+  const current = cart[id] || 0;
+  setQty(id, current + delta);
 }
 
-window.onload = function(){
+function setQty(id, value) {
+  let q = parseInt(value) || 0;
+  if (q < 0) q = 0;
+  if (q > 20) q = 20;
+  cart[id] = q;
+  const input = document.getElementById('qty-' + id);
+  if (input) input.value = q;
+  renderCart();
+}
 
-    const savedOrder = localStorage.getItem("orderSummary");
+// ===== Cart & Totals =====
+function renderCart() {
+  const wrap = $('#cart');
+  const items = MENU.filter(m => cart[m.id] > 0);
+  if (items.length === 0) {
+    wrap.innerHTML = '<p class="cart-empty">No items yet — pick something delicious!</p>';
+  } else {
+    wrap.innerHTML = items.map(m => `
+      <div class="cart-item">
+        <span>${m.name} × ${cart[m.id]}</span>
+        <span>${RM(m.price * cart[m.id])}</span>
+      </div>
+    `).join('');
+  }
+  calculateTotals();
+}
 
-    if(savedOrder){
-        document.getElementById("summary").innerHTML = savedOrder;
-    }
-};
+function calculateTotals() {
+  const subtotal = MENU.reduce((s, m) => s + (cart[m.id] || 0) * m.price, 0);
+  const hasItems = subtotal > 0;
+  const delivery = hasItems ? DELIVERY : 0;
+  $('#subtotal').textContent = RM(subtotal);
+  $('#delivery').textContent = RM(delivery);
+  $('#total').textContent = RM(subtotal + delivery);
+  return { subtotal, delivery, total: subtotal + delivery };
+}
+
+// ===== Payment Toggle =====
+document.querySelectorAll('input[name="payment"]').forEach(r => {
+  r.addEventListener('change', e => {
+    $('#bankBox').classList.toggle('hidden', e.target.value !== 'bank');
+  });
+});
+
+// ===== Receipt Preview =====
+$('#receipt').addEventListener('change', e => {
+  const file = e.target.files[0];
+  const preview = $('#receiptPreview');
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      preview.src = ev.target.result;
+      preview.classList.remove('hidden');
+    };
+    reader.readAsDataURL(file);
+  } else {
+    preview.classList.add('hidden');
+  }
+});
+
+// ===== Validation =====
+function clearErrors() {
+  document.querySelectorAll('.error').forEach(e => e.textContent = '');
+}
+function showError(field, msg) {
+  const el = document.querySelector(`.error[data-for="${field}"]`);
+  if (el) el.textContent = msg;
+}
+
+function validate() {
+  clearErrors();
+  let ok = true;
+  const name = $('#name').value.trim();
+  const phone = $('#phone').value.trim();
+  const address = $('#address').value.trim();
+  const payment = document.querySelector('input[name="payment"]:checked').value;
+  const receipt = $('#receipt').files[0];
+  const totals = calculateTotals();
+
+  if (totals.subtotal === 0) { alert('Please add at least one item to your order.'); return false; }
+  if (name.length < 2) { showError('name', 'Please enter your full name'); ok = false; }
+  if (!/^[0-9\-+\s]{8,15}$/.test(phone)) { showError('phone', 'Enter a valid phone number'); ok = false; }
+  if (address.length < 5) { showError('address', 'Please enter a delivery address'); ok = false; }
+  if (payment === 'bank' && !receipt) { showError('receipt', 'Please upload your payment receipt'); ok = false; }
+  return ok;
+}
+
+// ===== Calculate Button =====
+$('#calcBtn').addEventListener('click', () => {
+  const t = calculateTotals();
+  if (t.subtotal === 0) { alert('Add items to see the total.'); return; }
+  alert(`Subtotal: ${RM(t.subtotal)}\nDelivery: ${RM(t.delivery)}\nTotal: ${RM(t.total)}`);
+});
+
+// ===== Submit =====
+$('#orderForm').addEventListener('submit', e => {
+  e.preventDefault();
+  if (!validate()) return;
+
+  const totals = calculateTotals();
+  const payment = document.querySelector('input[name="payment"]:checked').value;
+  const items = MENU.filter(m => cart[m.id] > 0)
+    .map(m => `<div><span>${m.name} × ${cart[m.id]}</span><span>${RM(m.price * cart[m.id])}</span></div>`)
+    .join('');
+
+  $('#receiptSummary').innerHTML = `
+    ${items}
+    <div><span>Subtotal</span><span>${RM(totals.subtotal)}</span></div>
+    <div><span>Delivery</span><span>${RM(totals.delivery)}</span></div>
+    <div><strong>Total Paid</strong><strong>${RM(totals.total)}</strong></div>
+    <div><span>Customer</span><span>${$('#name').value}</span></div>
+    <div><span>Phone</span><span>${$('#phone').value}</span></div>
+    <div><span>Payment</span><span>${payment === 'cash' ? 'Cash on Delivery' : 'Bank Transfer'}</span></div>
+  `;
+  $('#thankYou').classList.remove('hidden');
+});
+
+// ===== Reset =====
+$('#newOrderBtn').addEventListener('click', () => {
+  Object.keys(cart).forEach(k => delete cart[k]);
+  $('#orderForm').reset();
+  $('#bankBox').classList.add('hidden');
+  $('#receiptPreview').classList.add('hidden');
+  $('#thankYou').classList.add('hidden');
+  renderMenu();
+  renderCart();
+});
+
+// ===== Init =====
+renderMenu();
+renderCart();
