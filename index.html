@@ -7,80 +7,149 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <h1 class="brand">🍲 Naija Bites</h1>
-      <p class="tagline">Authentic Nigerian flavors — order online</p>
-    </div>
-  </header>
 
-  <main class="container main-grid">
-    <!-- MENU -->
-    <section class="menu-section">
-      <h2>Our Menu</h2>
-      <div id="menu" class="menu-grid"></div>
-    </section>
+<header class="site-header">
+  <div class="container header-inner">
+    <h1 class="brand">🍲 Naija Bites</h1>
+    <p class="tagline">Authentic Nigerian flavors — order online</p>
+  </div>
+</header>
 
-    <!-- ORDER FORM -->
-    <aside class="order-section">
-      <h2>Your Order</h2>
-      <div id="cart" class="cart"></div>
+<main class="container main-grid">
 
-      <div class="totals">
-        <div class="row"><span>Subtotal</span><span id="subtotal">RM 0.00</span></div>
-        <div class="row"><span>Delivery</span><span id="delivery">RM 5.00</span></div>
-        <div class="row total"><span>Total</span><span id="total">RM 5.00</span></div>
+<!-- MENU -->
+<section class="menu-section">
+  <h2>Our Menu</h2>
+
+  <div class="menu-grid">
+
+    <div class="food-card">
+      <img src="jallof-rice.png" alt="Jollof Rice">
+      <div class="food-card-body">
+        <h4>Jollof Rice</h4>
+        <div class="price">RM 12.00</div>
+        <div class="qty-control">
+          <button onclick="changeQty('jollof', -1)">−</button>
+          <input id="qty-jollof" type="number" value="0" min="0" max="20"
+                 onchange="setQty('jollof', this.value)">
+          <button onclick="changeQty('jollof', 1)">+</button>
+        </div>
       </div>
-
-      <form id="orderForm" novalidate>
-        <h3>Customer Details</h3>
-        <label>Full Name
-          <input type="text" id="name" placeholder="e.g. Ahmad Bello" />
-          <small class="error" data-for="name"></small>
-        </label>
-        <label>Phone Number
-          <input type="tel" id="phone" placeholder="e.g. 012-3456789" />
-          <small class="error" data-for="phone"></small>
-        </label>
-        <label>Delivery Address
-          <textarea id="address" rows="2" placeholder="House no, street, city"></textarea>
-          <small class="error" data-for="address"></small>
-        </label>
-
-        <h3>Payment Method</h3>
-        <div class="pay-toggle">
-          <label><input type="radio" name="payment" value="cash" checked /> Cash on Delivery</label>
-          <label><input type="radio" name="payment" value="bank" /> Bank Transfer</label>
-        </div>
-
-        <div id="bankBox" class="bank-box hidden">
-          <p><strong>Maybank</strong> • 123456789012 • Naija Bites Sdn Bhd</p>
-          <label>Upload Payment Receipt
-            <input type="file" id="receipt" accept="image/*" />
-            <small class="error" data-for="receipt"></small>
-          </label>
-          <img id="receiptPreview" class="receipt-preview hidden" alt="Receipt preview" />
-        </div>
-
-        <button type="submit" id="submitBtn" class="btn btn-primary">Submit Order</button>
-      </form>
-    </aside>
-  </main>
-
-  <!-- THANK YOU -->
-  <div id="thankYou" class="thank-you hidden">
-    <div class="card">
-      <h2>🎉 Thank You for Your Order!</h2>
-      <p>We appreciate your business. Your delicious food is being prepared.</p>
-      <div id="receiptSummary"></div>
-      <button id="newOrderBtn" class="btn btn-primary">Place Another Order</button>
     </div>
+
+    <div class="food-card">
+      <img src="fried-rice.png" alt="Fried Rice">
+      <div class="food-card-body">
+        <h4>Fried Rice</h4>
+        <div class="price">RM 12.00</div>
+        <div class="qty-control">
+          <button onclick="changeQty('fried', -1)">−</button>
+          <input id="qty-fried" type="number" value="0" min="0" max="20"
+                 onchange="setQty('fried', this.value)">
+          <button onclick="changeQty('fried', 1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card">
+      <img src="pounded-yam.jpg" alt="Pounded Yam">
+      <div class="food-card-body">
+        <h4>Pounded Yam & Egusi</h4>
+        <div class="price">RM 15.00</div>
+        <div class="qty-control">
+          <button onclick="changeQty('pounded', -1)">−</button>
+          <input id="qty-pounded" type="number" value="0" min="0" max="20"
+                 onchange="setQty('pounded', this.value)">
+          <button onclick="changeQty('pounded', 1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card">
+      <img src="suya.jpg" alt="Suya">
+      <div class="food-card-body">
+        <h4>Suya</h4>
+        <div class="price">RM 14.00</div>
+        <div class="qty-control">
+          <button onclick="changeQty('suya', -1)">−</button>
+          <input id="qty-suya" type="number" value="0" min="0" max="20"
+                 onchange="setQty('suya', this.value)">
+          <button onclick="changeQty('suya', 1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card">
+      <img src="puff-puff.jpg" alt="Puff Puff">
+      <div class="food-card-body">
+        <h4>Puff Puff</h4>
+        <div class="price">RM 4.00</div>
+        <div class="qty-control">
+          <button onclick="changeQty('puff', -1)">−</button>
+          <input id="qty-puff" type="number" value="0" min="0" max="20"
+                 onchange="setQty('puff', this.value)">
+          <button onclick="changeQty('puff', 1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card">
+      <img src="chin-chin.jpg" alt="Chin Chin">
+      <div class="food-card-body">
+        <h4>Chin Chin</h4>
+        <div class="price">RM 5.00</div>
+        <div class="qty-control">
+          <button onclick="changeQty('chin', -1)">−</button>
+          <input id="qty-chin" type="number" value="0" min="0" max="20"
+                 onchange="setQty('chin', this.value)">
+          <button onclick="changeQty('chin', 1)">+</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ORDER -->
+<aside class="order-section">
+  <h2>Your Order</h2>
+
+  <div id="cart" class="cart"></div>
+
+  <div class="totals">
+    <div class="row"><span>Subtotal</span><span id="subtotal">RM 0.00</span></div>
+    <div class="row"><span>Delivery</span><span id="delivery">RM 5.00</span></div>
+    <div class="row total"><span>Total</span><span id="total">RM 5.00</span></div>
   </div>
 
-  <footer class="site-footer">
-    <p>© 2026 Naija Bites. All rights reserved.</p>
-  </footer>
+  <form id="orderForm">
+    <h3>Customer Details</h3>
 
-  <script src="j.script.js"></script>
+    <input id="name" placeholder="Full Name">
+    <input id="phone" placeholder="Phone Number">
+    <textarea id="address" placeholder="Address"></textarea>
+
+    <h3>Payment</h3>
+    <label><input type="radio" name="payment" value="cash" checked> Cash</label>
+    <label><input type="radio" name="payment" value="bank"> Bank</label>
+
+    <div id="bankBox" class="hidden">
+      <p>Maybank - 123456789</p>
+      <input type="file" id="receipt">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Order</button>
+  </form>
+</aside>
+
+</main>
+
+<div id="thankYou" class="hidden">
+  <h2>Thank you!</h2>
+  <div id="receiptSummary"></div>
+  <button id="newOrderBtn">New Order</button>
+</div>
+
+<script src="j.script.js"></script>
 </body>
-</html>    
+</html>
