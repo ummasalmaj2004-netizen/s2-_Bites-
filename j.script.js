@@ -127,13 +127,6 @@ function validate() {
   return ok;
 }
 
-// ===== Calculate Button =====
-$('#calcBtn').addEventListener('click', () => {
-  const t = calculateTotals();
-  if (t.subtotal === 0) { alert('Add items to see the total.'); return; }
-  alert(`Subtotal: ${RM(t.subtotal)}\nDelivery: ${RM(t.delivery)}\nTotal: ${RM(t.total)}`);
-});
-
 // ===== Submit =====
 $('#orderForm').addEventListener('submit', e => {
   e.preventDefault();
