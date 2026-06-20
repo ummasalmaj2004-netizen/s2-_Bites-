@@ -1,3 +1,9 @@
+##SUPABASE##
+const SUPABASE_URL = "https://azqkjbfctblxzvjeroam.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6cWtqYmZjdGJseHp2amVyb2FtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExOTQ0ODUsImV4cCI6MjA5Njc3MDQ4NX0.PG2dbsz6ujYtEf8nky3-bisabpOudp2QjAjkIM8jlF0";
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 const DELIVERY = 5;
 const cart = {};
 
