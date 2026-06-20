@@ -1,4 +1,4 @@
-// ================= SUPABASE SETUP =================
+// ================= SUPABASE =================
 const SUPABASE_URL = "https://azqkjbfctblxzvjeroam.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6cWtqYmZjdGJseHp2amVjeroamIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExOTQ0ODUsImV4cCI6MjA5Njc3MDQ4NX0.PG2dbsz6ujYtEf8nky3-bisabpOudp2QjAjkIM8jlF0";
 
@@ -17,28 +17,26 @@ const MENU = {
   chin: 5
 };
 
-// ================= SCREEN CONTROL (FIX) =================
-function showScreen(screenId) {
-  document.querySelectorAll(".screen").forEach(el => {
-    el.style.display = "none";
-  });
-
-  document.getElementById(screenId).style.display = "block";
-}
-
-// ================= CART =================
+// ================= CART FIXED =================
 function changeQty(id, val) {
   cart[id] = Math.max(0, (cart[id] || 0) + val);
-  document.getElementById('qty-' + id).value = cart[id];
+
+  const input = document.getElementById('qty-' + id);
+  if (input) input.value = cart[id];
+
   updateCart();
 }
 
 function setQty(id, val) {
   cart[id] = Math.max(0, parseInt(val) || 0);
-  document.getElementById('qty-' + id).value = cart[id];
+
+  const input = document.getElementById('qty-' + id);
+  if (input) input.value = cart[id];
+
   updateCart();
 }
 
+// ================= CART UI =================
 function updateCart() {
   let subtotal = 0;
   let html = "";
@@ -59,19 +57,24 @@ function updateCart() {
 
   const delivery = subtotal > 0 ? DELIVERY : 0;
 
-  document.getElementById("cart").innerHTML =
-    html || '<div class="cart-empty">No items selected</div>';
+  const cartBox = document.getElementById("cart");
+  const subtotalBox = document.getElementById("subtotal");
+  const deliveryBox = document.getElementById("delivery");
+  const totalBox = document.getElementById("total");
 
-  document.getElementById("subtotal").innerText = "RM " + subtotal.toFixed(2);
-  document.getElementById("delivery").innerText = "RM " + delivery.toFixed(2);
-  document.getElementById("total").innerText = "RM " + (subtotal + delivery).toFixed(2);
+  if (cartBox) cartBox.innerHTML = html || '<div class="cart-empty">No items selected</div>';
+  if (subtotalBox) subtotalBox.innerText = "RM " + subtotal.toFixed(2);
+  if (deliveryBox) deliveryBox.innerText = "RM " + delivery.toFixed(2);
+  if (totalBox) totalBox.innerText = "RM " + (subtotal + delivery).toFixed(2);
 }
 
-// ================= PAYMENT TOGGLE =================
+// ================= PAYMENT =================
 document.querySelectorAll('input[name="payment"]').forEach(radio => {
   radio.addEventListener("change", function () {
     const bankBox = document.getElementById("bankBox");
-    bankBox.style.display = this.value === "bank" ? "block" : "none";
+    if (bankBox) {
+      bankBox.style.display = this.value === "bank" ? "block" : "none";
+    }
   });
 });
 
@@ -125,7 +128,7 @@ document.getElementById("orderForm").addEventListener("submit", async function (
     }
   }
 
-  // ================= SAVE TO SUPABASE =================
+  // ================= SAVE ORDER =================
   const { error } = await supabase.from("orders").insert([
     {
       customer_name: name,
@@ -142,38 +145,17 @@ document.getElementById("orderForm").addEventListener("submit", async function (
 
   if (error) {
     console.log(error);
-    alert("❌ Order failed!");
+    alert("Order failed!");
     return;
   }
 
-  // ================= SHOW RECEIPT =================
-  let summary = "<h3>Order Summary</h3>";
+  alert("Order placed successfully!");
 
-  orderItems.forEach(i => {
-    summary += `<p>${i.item} × ${i.qty}</p>`;
-  });
-
-  summary += `
-    <hr>
-    <p><b>Total:</b> RM ${total.toFixed(2)}</p>
-    <p><b>Name:</b> ${name}</p>
-    <p><b>Phone:</b> ${phone}</p>
-    <p><b>Address:</b> ${address}</p>
-    <p><b>Payment:</b> ${payment}</p>
-  `;
-
-  document.getElementById("receiptSummary").innerHTML = summary;
-
-  // ================= SAFE SCREEN SWITCH =================
-  showScreen("thankYou");
-});
-
-// ================= NEW ORDER =================
-document.getElementById("newOrderBtn").addEventListener("click", function () {
+  // reset UI
   location.reload();
 });
 
 // ================= INIT =================
 window.onload = () => {
-  showScreen("mainScreen");
+  updateCart();
 };
