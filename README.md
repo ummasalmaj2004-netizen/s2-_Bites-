@@ -1,101 +1,57 @@
-🍲 Naija Bites
-Interactive Online Food Ordering System
+# 🍲 Naija Bites  
+### Interactive Online Food Ordering System
 
-A modern, responsive food ordering web application that simulates a real-world online restaurant ordering experience. Users can browse a menu, customize quantities, view a live cart summary, and place orders with customer details and payment options.
+A modern, responsive food ordering web application that simulates a real-world restaurant ordering experience. Users can browse menu items, select quantities, view a live cart, and place orders with customer details and payment options.
 
-📌 Project Overview
+---
 
-Naija Bites is a front-end web application built to demonstrate practical skills in HTML, CSS, and JavaScript, focusing on DOM manipulation, dynamic UI updates, and form handling.
+## 📌 Project Overview
 
-The system replicates a simplified food delivery checkout process similar to real-world platforms.
+Naija Bites is a front-end web project built using **HTML, CSS, and JavaScript**.  
+It demonstrates real-world concepts such as DOM manipulation, dynamic UI updates, and form handling.
 
-🚀 Key Features
-🧾 Menu System
-Interactive food catalog with images
-Nigerian dishes (Jollof Rice, Suya, Pounded Yam, etc.)
-Clean card-based layout
-➕ Order Management
-Increase/decrease quantity buttons
-Manual quantity input support
-Real-time cart updates
-🛒 Smart Cart System
-Dynamic item listing
-Automatic subtotal calculation
-Delivery fee logic
-Live total price updates
-👤 Customer Checkout
-Full name, phone, and address form
-Input validation support
-💳 Payment Options
-Cash payment
-Bank transfer option
-Conditional receipt upload field
-🎉 Order Confirmation
-Professional receipt summary
-Thank-you confirmation screen
-“New Order” reset functionality
-🛠️ Tech Stack
-Technology	Purpose
-HTML5	Page structure
-CSS3	Styling & responsive layout
-JavaScript (Vanilla)	Logic & interactivity
-📁 Project Structure
-Naija-Bites/
-│
-├── index.html        # Main application UI
-├── style.css         # Styling and layout design
-├── j.script.js       # Application logic (cart, checkout, UI updates)
-│
-└── images/           # Food images used in menu
-    ├── jallof-rice.png
-    ├── fried-rice.png
-    ├── pounded-yam.jpg
-    ├── suya.jpg
-    ├── puff-puff.jpg
-    └── chin-chin.jpg
-⚙️ How It Works
-User browses the menu and selects food items
-Quantity updates automatically in the cart
-Cart dynamically calculates:
-Subtotal
-Delivery fee
-Total amount
-User fills in delivery details
-User selects payment method:
-Cash (instant order)
-Bank transfer (with receipt upload option)
-On submission:
-Order summary is generated
-Thank-you screen is displayed
-User can restart a new order
-🎯 Learning Objectives
+---
 
-This project demonstrates:
+## 🚀 Features
 
-DOM manipulation using JavaScript
-Event-driven programming
-Form validation & handling
-Dynamic UI rendering
-State management using objects (cart system)
-Responsive UI design principles
-📈 Future Enhancements
+### 🧾 Menu System
+- Food items displayed in clean cards
+- Nigerian dishes (Jollof Rice, Suya, Pounded Yam, etc.)
+- Images for each item
 
-Planned improvements to elevate the system:
+### ➕ Order Controls
+- Increase / decrease quantity buttons
+- Manual input support
+- Instant updates to cart
 
-📲 WhatsApp order integration
-💾 LocalStorage order persistence
-🧾 PDF invoice generation
-🔐 Backend integration (Node.js / Firebase)
-📊 Admin dashboard for order tracking
-📱 Fully mobile-optimized UI improvements
-👨‍💻 Developer
+### 🛒 Live Cart
+- Displays selected items
+- Auto-calculates subtotal
+- Adds delivery fee
+- Updates total in real time
 
-Naija Bites Project
-Frontend Development Portfolio Project
-Built for learning and demonstration purposes
+### 👤 Checkout System
+- Customer details form (name, phone, address)
+- Basic input validation
 
-⭐ Project Highlights
-Clean UI with real-world ordering logic
-Fully interactive JavaScript-based system
-Beginner-friendly but structured like a production app
-Strong foundation for future full-stack expansion
+### 💳 Payment Options
+- Cash on delivery
+- Bank transfer option
+- Conditional receipt upload section
+
+### 🎉 Order Confirmation
+- Receipt summary generation
+- Thank you screen after submission
+- New order reset button
+
+---
+
+## 🛠️ Tech Stack
+
+- HTML5 — structure  
+- CSS3 — styling and layout  
+- JavaScript (Vanilla) — logic and interactivity  
+
+---
+
+## 📁 Project Structure
