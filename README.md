@@ -55,3 +55,61 @@ It demonstrates real-world concepts such as DOM manipulation, dynamic UI updates
 ---
 
 ## 📁 Project Structure
+Naija-Bites/
+│
+├── index.html
+├── style.css
+├── j.script.js
+│
+└── images/
+├── jallof-rice.png
+├── fried-rice.png
+├── pounded-yam.jpg
+├── suya.jpg
+├── puff-puff.jpg
+└── chin-chin.jpg
+
+---
+
+## ⚙️ How It Works
+
+1. User selects food items from the menu  
+2. Quantity updates the cart automatically  
+3. System calculates subtotal, delivery, and total  
+4. User fills in delivery details  
+5. User selects payment method  
+6. Clicking “Submit Order” generates a receipt  
+7. Thank you screen is displayed  
+8. User can restart a new order  
+
+---
+
+## 🎯 What I Learned
+
+- DOM manipulation using JavaScript  
+- Event handling (click, submit, input change)  
+- Dynamic UI updates  
+- State management using objects  
+- Real-world ordering system logic  
+
+---
+
+## 🚀 Future Improvements
+
+- WhatsApp order integration 📲  
+- Save orders using LocalStorage 💾  
+- PDF receipt generation 🧾  
+- Backend integration (Node.js / Firebase) 🔥  
+- Mobile optimization 📱  
+
+---
+
+## 👨‍💻 Author
+
+Frontend development project built for learning and portfolio purposes.
+
+---
+
+## ⭐ Highlight
+
+A simple but functional e-commerce food ordering simulation built from scratch using vanilla JavaScript.
