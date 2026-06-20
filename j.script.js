@@ -1,15 +1,3 @@
-// ================= SUPABASE =================
-const SUPABASE_URL = "https://azqkjbfctblxzvjeroam.supabase.co";
-
-// Your Publishable Key
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_y5XJvIjhtTMqBPkqGbvPYA_w-nmk1zG";
-
-// Create client
-const supabase = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
-);
-// ================= CONFIG =================
 const DELIVERY = 5;
 const cart = {};
 
