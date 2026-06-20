@@ -1,29 +1,52 @@
-🍲 Naija Bites — Online Food Order Calculator
+🍲 Naija Bites
+Interactive Online Food Ordering System
 
-Naija Bites is a simple interactive web application that allows users to browse a Nigerian food menu, select items, calculate totals, and place an order online. It demonstrates front-end web development using HTML, CSS, and JavaScript with DOM manipulation and form validation.
+A modern, responsive food ordering web application that simulates a real-world online restaurant ordering experience. Users can browse a menu, customize quantities, view a live cart summary, and place orders with customer details and payment options.
 
-🚀 Live Features
-🧾 Interactive food menu with images
-➕➖ Quantity controls (+ / - buttons)
-🛒 Live cart updates
-💰 Automatic subtotal, delivery, and total calculation
-🧑 Customer details form (name, phone, address)
-💳 Payment method selection (Cash / Bank transfer)
-📎 Bank receipt upload option (for bank payments)
-🎉 Order confirmation (Thank You page)
-🔄 “New Order” reset feature
-🛠️ Technologies Used
-HTML5 — page structure
-CSS3 — styling and responsive layout
-JavaScript (Vanilla) — interactivity and logic
+📌 Project Overview
+
+Naija Bites is a front-end web application built to demonstrate practical skills in HTML, CSS, and JavaScript, focusing on DOM manipulation, dynamic UI updates, and form handling.
+
+The system replicates a simplified food delivery checkout process similar to real-world platforms.
+
+🚀 Key Features
+🧾 Menu System
+Interactive food catalog with images
+Nigerian dishes (Jollof Rice, Suya, Pounded Yam, etc.)
+Clean card-based layout
+➕ Order Management
+Increase/decrease quantity buttons
+Manual quantity input support
+Real-time cart updates
+🛒 Smart Cart System
+Dynamic item listing
+Automatic subtotal calculation
+Delivery fee logic
+Live total price updates
+👤 Customer Checkout
+Full name, phone, and address form
+Input validation support
+💳 Payment Options
+Cash payment
+Bank transfer option
+Conditional receipt upload field
+🎉 Order Confirmation
+Professional receipt summary
+Thank-you confirmation screen
+“New Order” reset functionality
+🛠️ Tech Stack
+Technology	Purpose
+HTML5	Page structure
+CSS3	Styling & responsive layout
+JavaScript (Vanilla)	Logic & interactivity
 📁 Project Structure
 Naija-Bites/
 │
-├── index.html
-├── style.css
-├── j.script.js
+├── index.html        # Main application UI
+├── style.css         # Styling and layout design
+├── j.script.js       # Application logic (cart, checkout, UI updates)
 │
-└── images/
+└── images/           # Food images used in menu
     ├── jallof-rice.png
     ├── fried-rice.png
     ├── pounded-yam.jpg
@@ -31,37 +54,48 @@ Naija-Bites/
     ├── puff-puff.jpg
     └── chin-chin.jpg
 ⚙️ How It Works
-Users select food items from the menu.
-Quantity is updated using buttons or input fields.
-Cart updates automatically with item totals.
-Subtotal, delivery fee, and total are calculated in real-time.
-User fills in personal details.
-Payment method is selected:
-Cash → no extra action
-Bank → shows bank details and receipt upload option
-Clicking Submit Order generates a receipt summary.
-A Thank You screen is displayed after submission.
-User can restart using New Order button.
-📌 Key Learning Outcomes
+User browses the menu and selects food items
+Quantity updates automatically in the cart
+Cart dynamically calculates:
+Subtotal
+Delivery fee
+Total amount
+User fills in delivery details
+User selects payment method:
+Cash (instant order)
+Bank transfer (with receipt upload option)
+On submission:
+Order summary is generated
+Thank-you screen is displayed
+User can restart a new order
+🎯 Learning Objectives
 
 This project demonstrates:
 
 DOM manipulation using JavaScript
-Event handling (click, submit, change)
-Form validation basics
-Dynamic UI updates
-Responsive layout design
-Real-world mini e-commerce logic
-🧠 Future Improvements
-Add WhatsApp order integration 📲
-Save orders using LocalStorage 💾
-Add backend (Node.js / Firebase) 🔥
-Improve mobile responsiveness 📱
-Add payment gateway simulation 💳
-👨‍💻 Author
+Event-driven programming
+Form validation & handling
+Dynamic UI rendering
+State management using objects (cart system)
+Responsive UI design principles
+📈 Future Enhancements
 
-Created as a front-end development project for learning purposes.
+Planned improvements to elevate the system:
 
-📄 License
+📲 WhatsApp order integration
+💾 LocalStorage order persistence
+🧾 PDF invoice generation
+🔐 Backend integration (Node.js / Firebase)
+📊 Admin dashboard for order tracking
+📱 Fully mobile-optimized UI improvements
+👨‍💻 Developer
 
-This project is open-source and free to use for educational purposes.
+Naija Bites Project
+Frontend Development Portfolio Project
+Built for learning and demonstration purposes
+
+⭐ Project Highlights
+Clean UI with real-world ordering logic
+Fully interactive JavaScript-based system
+Beginner-friendly but structured like a production app
+Strong foundation for future full-stack expansion
