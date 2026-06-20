@@ -1,3 +1,5 @@
+
+// ================= ERROR DEBUG =================
 window.addEventListener("error", (e) => {
   console.log("JS ERROR:", e.message);
 });
@@ -21,7 +23,31 @@ const MENU = {
   chin: 5
 };
 
-// ================= CART FIXED =================
+// ================= INIT SAFE WRAPPER =================
+window.addEventListener("DOMContentLoaded", () => {
+
+  updateCart();
+
+  // PAYMENT TOGGLE SAFE
+  document.querySelectorAll('input[name="payment"]').forEach(radio => {
+    radio.addEventListener("change", function () {
+      const bankBox = document.getElementById("bankBox");
+      if (bankBox) {
+        bankBox.style.display = this.value === "bank" ? "block" : "none";
+      }
+    });
+  });
+
+  // ORDER FORM SAFE
+  const form = document.getElementById("orderForm");
+
+  if (form) {
+    form.addEventListener("submit", submitOrder);
+  }
+
+});
+
+// ================= CART =================
 function changeQty(id, val) {
   cart[id] = Math.max(0, (cart[id] || 0) + val);
 
@@ -72,24 +98,14 @@ function updateCart() {
   if (totalBox) totalBox.innerText = "RM " + (subtotal + delivery).toFixed(2);
 }
 
-// ================= PAYMENT =================
-document.querySelectorAll('input[name="payment"]').forEach(radio => {
-  radio.addEventListener("change", function () {
-    const bankBox = document.getElementById("bankBox");
-    if (bankBox) {
-      bankBox.style.display = this.value === "bank" ? "block" : "none";
-    }
-  });
-});
-
-// ================= ORDER SUBMIT =================
-document.getElementById("orderForm").addEventListener("submit", async function (e) {
+// ================= ORDER FUNCTION =================
+async function submitOrder(e) {
   e.preventDefault();
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
-  const payment = document.querySelector('input[name="payment"]:checked').value;
+  const name = document.getElementById("name")?.value;
+  const phone = document.getElementById("phone")?.value;
+  const address = document.getElementById("address")?.value;
+  const payment = document.querySelector('input[name="payment"]:checked')?.value;
 
   let subtotal = 0;
   let orderItems = [];
@@ -154,12 +170,5 @@ document.getElementById("orderForm").addEventListener("submit", async function (
   }
 
   alert("Order placed successfully!");
-
-  // reset UI
   location.reload();
-});
-
-// ================= INIT =================
-window.onload = () => {
-  updateCart();
-};
+}
