@@ -1,3 +1,7 @@
+window.addEventListener("error", (e) => {
+  console.log("JS ERROR:", e.message);
+});
+
 // ================= SUPABASE =================
 const SUPABASE_URL = "https://azqkjbfctblxzvjeroam.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6cWtqYmZjdGJseHp2amVjeroamIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExOTQ0ODUsImV4cCI6MjA5Njc3MDQ4NX0.PG2dbsz6ujYtEf8nky3-bisabpOudp2QjAjkIM8jlF0";
