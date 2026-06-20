@@ -1,6 +1,6 @@
 // ================= SUPABASE SETUP =================
 const SUPABASE_URL = "https://azqkjbfctblxzvjeroam.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6cWtqYmZjdGJseHp2amVyb2FtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExOTQ0ODUsImV4cCI6MjA5Njc3MDQ4NX0.PG2dbsz6ujYtEf8nky3-bisabpOudp2QjAjkIM8jlF0";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6cWtqYmZjdGJseHp2amVjeroamIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExOTQ0ODUsImV4cCI6MjA5Njc3MDQ4NX0.PG2dbsz6ujYtEf8nky3-bisabpOudp2QjAjkIM8jlF0";
 
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -17,7 +17,16 @@ const MENU = {
   chin: 5
 };
 
-// ================= CART FUNCTIONS =================
+// ================= SCREEN CONTROL (FIX) =================
+function showScreen(screenId) {
+  document.querySelectorAll(".screen").forEach(el => {
+    el.style.display = "none";
+  });
+
+  document.getElementById(screenId).style.display = "block";
+}
+
+// ================= CART =================
 function changeQty(id, val) {
   cart[id] = Math.max(0, (cart[id] || 0) + val);
   document.getElementById('qty-' + id).value = cart[id];
@@ -53,29 +62,20 @@ function updateCart() {
   document.getElementById("cart").innerHTML =
     html || '<div class="cart-empty">No items selected</div>';
 
-  document.getElementById("subtotal").innerText =
-    "RM " + subtotal.toFixed(2);
-
-  document.getElementById("delivery").innerText =
-    "RM " + delivery.toFixed(2);
-
-  document.getElementById("total").innerText =
-    "RM " + (subtotal + delivery).toFixed(2);
+  document.getElementById("subtotal").innerText = "RM " + subtotal.toFixed(2);
+  document.getElementById("delivery").innerText = "RM " + delivery.toFixed(2);
+  document.getElementById("total").innerText = "RM " + (subtotal + delivery).toFixed(2);
 }
 
 // ================= PAYMENT TOGGLE =================
 document.querySelectorAll('input[name="payment"]').forEach(radio => {
   radio.addEventListener("change", function () {
     const bankBox = document.getElementById("bankBox");
-    if (this.value === "bank") {
-      bankBox.classList.remove("hidden");
-    } else {
-      bankBox.classList.add("hidden");
-    }
+    bankBox.style.display = this.value === "bank" ? "block" : "none";
   });
 });
 
-// ================= SUBMIT ORDER =================
+// ================= ORDER SUBMIT =================
 document.getElementById("orderForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -105,7 +105,7 @@ document.getElementById("orderForm").addEventListener("submit", async function (
 
   let receiptFileUrl = null;
 
-  // ================= UPLOAD RECEIPT (BANK ONLY) =================
+  // ================= RECEIPT UPLOAD =================
   if (payment === "bank") {
     const fileInput = document.getElementById("receipt");
 
@@ -113,7 +113,7 @@ document.getElementById("orderForm").addEventListener("submit", async function (
       const file = fileInput.files[0];
       const fileName = `${Date.now()}-${file.name}`;
 
-      const { data, error } = await supabase.storage
+      const { error } = await supabase.storage
         .from("receipts")
         .upload(fileName, file);
 
@@ -125,16 +125,16 @@ document.getElementById("orderForm").addEventListener("submit", async function (
     }
   }
 
-  // ================= SAVE ORDER TO SUPABASE =================
+  // ================= SAVE TO SUPABASE =================
   const { error } = await supabase.from("orders").insert([
     {
       customer_name: name,
-      phone: phone,
-      address: address,
+      phone,
+      address,
       items: orderItems,
       payment_method: payment,
-      subtotal: subtotal,
-      delivery: delivery,
+      subtotal,
+      delivery,
       total_price: total,
       receipt_url: receiptFileUrl
     }
@@ -146,7 +146,7 @@ document.getElementById("orderForm").addEventListener("submit", async function (
     return;
   }
 
-  // ================= UI UPDATE =================
+  // ================= SHOW RECEIPT =================
   let summary = "<h3>Order Summary</h3>";
 
   orderItems.forEach(i => {
@@ -155,8 +155,6 @@ document.getElementById("orderForm").addEventListener("submit", async function (
 
   summary += `
     <hr>
-    <p><b>Subtotal:</b> RM ${subtotal.toFixed(2)}</p>
-    <p><b>Delivery:</b> RM ${delivery.toFixed(2)}</p>
     <p><b>Total:</b> RM ${total.toFixed(2)}</p>
     <p><b>Name:</b> ${name}</p>
     <p><b>Phone:</b> ${phone}</p>
@@ -166,11 +164,16 @@ document.getElementById("orderForm").addEventListener("submit", async function (
 
   document.getElementById("receiptSummary").innerHTML = summary;
 
-  document.querySelector(".main-grid").style.display = "none";
-  document.getElementById("thankYou").classList.remove("hidden");
+  // ================= SAFE SCREEN SWITCH =================
+  showScreen("thankYou");
 });
 
 // ================= NEW ORDER =================
 document.getElementById("newOrderBtn").addEventListener("click", function () {
   location.reload();
 });
+
+// ================= INIT =================
+window.onload = () => {
+  showScreen("mainScreen");
+};
