@@ -24,97 +24,79 @@
 
   <div class="menu-grid">
 
-    <!-- Jollof Rice -->
     <div class="food-card">
       <img src="images/jallof-rice.png" alt="Jollof Rice">
       <div class="food-card-body">
         <h4>Jollof Rice</h4>
         <div class="price">RM 12.00</div>
-
         <div class="qty-control">
           <button onclick="changeQty('jollof', -1)">−</button>
-          <input id="qty-jollof" type="number" value="0" min="0" max="20"
-                 onchange="setQty('jollof', this.value)">
+          <input id="qty-jollof" type="number" value="0" min="0" max="20" onchange="setQty('jollof', this.value)">
           <button onclick="changeQty('jollof', 1)">+</button>
         </div>
       </div>
     </div>
 
-    <!-- Fried Rice -->
     <div class="food-card">
       <img src="images/fried-rice.png" alt="Fried Rice">
       <div class="food-card-body">
         <h4>Fried Rice</h4>
         <div class="price">RM 12.00</div>
-
         <div class="qty-control">
           <button onclick="changeQty('fried', -1)">−</button>
-          <input id="qty-fried" type="number" value="0" min="0" max="20"
-                 onchange="setQty('fried', this.value)">
+          <input id="qty-fried" type="number" value="0" min="0" max="20" onchange="setQty('fried', this.value)">
           <button onclick="changeQty('fried', 1)">+</button>
         </div>
       </div>
     </div>
 
-    <!-- Pounded Yam -->
     <div class="food-card">
       <img src="images/pounded-yam.jpg" alt="Pounded Yam">
       <div class="food-card-body">
         <h4>Pounded Yam & Egusi</h4>
         <div class="price">RM 15.00</div>
-
         <div class="qty-control">
           <button onclick="changeQty('pounded', -1)">−</button>
-          <input id="qty-pounded" type="number" value="0" min="0" max="20"
-                 onchange="setQty('pounded', this.value)">
+          <input id="qty-pounded" type="number" value="0" min="0" max="20" onchange="setQty('pounded', this.value)">
           <button onclick="changeQty('pounded', 1)">+</button>
         </div>
       </div>
     </div>
 
-    <!-- Suya -->
     <div class="food-card">
       <img src="images/suya.jpg" alt="Suya">
       <div class="food-card-body">
         <h4>Suya</h4>
         <div class="price">RM 14.00</div>
-
         <div class="qty-control">
           <button onclick="changeQty('suya', -1)">−</button>
-          <input id="qty-suya" type="number" value="0" min="0" max="20"
-                 onchange="setQty('suya', this.value)">
+          <input id="qty-suya" type="number" value="0" min="0" max="20" onchange="setQty('suya', this.value)">
           <button onclick="changeQty('suya', 1)">+</button>
         </div>
       </div>
     </div>
 
-    <!-- Puff Puff -->
     <div class="food-card">
       <img src="images/puff-puff.jpg" alt="Puff Puff">
       <div class="food-card-body">
         <h4>Puff Puff</h4>
         <div class="price">RM 4.00</div>
-
         <div class="qty-control">
           <button onclick="changeQty('puff', -1)">−</button>
-          <input id="qty-puff" type="number" value="0" min="0" max="20"
-                 onchange="setQty('puff', this.value)">
+          <input id="qty-puff" type="number" value="0" min="0" max="20" onchange="setQty('puff', this.value)">
           <button onclick="changeQty('puff', 1)">+</button>
         </div>
       </div>
     </div>
 
-    <!-- Chin Chin -->
     <div class="food-card">
       <img src="images/chin-chin.jpg" alt="Chin Chin">
       <div class="food-card-body">
         <h4>Chin Chin</h4>
         <div class="price">RM 5.00</div>
-
         <div class="qty-control">
           <button onclick="changeQty('chin', -1)">−</button>
-          <input id="qty-chin" type="number" value="0" min="0" max="20"
-                 onchange="setQty('chin', this.value)">
+          <input id="qty-chin" type="number" value="0" min="0" max="20" onchange="setQty('chin', this.value)">
           <button onclick="changeQty('chin', 1)">+</button>
         </div>
       </div>
@@ -125,72 +107,51 @@
 
 <!-- ORDER -->
 <aside class="order-section">
-  <h2>Your Order</h2>
 
-  <div id="cart" class="cart">No items selected</div>
+<h2>Your Order</h2>
 
-  <div class="totals">
-    <div class="row">
-      <span>Subtotal</span>
-      <span id="subtotal">RM 0.00</span>
-    </div>
+<div id="cart" class="cart">No items selected</div>
 
-    <div class="row">
-      <span>Delivery</span>
-      <span id="delivery">RM 5.00</span>
-    </div>
+<div class="totals">
+  <div class="row"><span>Subtotal</span><span id="subtotal">RM 0.00</span></div>
+  <div class="row"><span>Delivery</span><span id="delivery">RM 0.00</span></div>
+  <div class="row total"><span>Total</span><span id="total">RM 0.00</span></div>
+</div>
 
-    <div class="row total">
-      <span>Total</span>
-      <span id="total">RM 5.00</span>
-    </div>
-  </div>
+<form id="orderForm">
 
-  <form id="orderForm">
+<h3>Customer Details</h3>
 
-    <h3>Customer Details</h3>
+<input id="name" type="text" placeholder="Full Name" required>
+<input id="phone" type="tel" placeholder="Phone Number" required>
+<textarea id="address" placeholder="Address" required></textarea>
 
-    <input id="name" type="text" placeholder="Full Name">
+<h3>Payment</h3>
 
-    <input id="phone" type="tel" placeholder="Phone Number">
+<label><input type="radio" name="payment" value="cash" checked> Cash</label>
+<label><input type="radio" name="payment" value="bank"> Bank</label>
 
-    <textarea id="address" placeholder="Address"></textarea>
+<div id="bankBox" class="hidden">
+  <p>Maybank - 123456789</p>
+  <input type="file" id="receipt">
+</div>
 
-    <h3>Payment</h3>
+<button type="submit" class="btn btn-primary">
+  Submit Order
+</button>
 
-    <label>
-      <input type="radio" name="payment" value="cash" checked>
-      Cash
-    </label>
-
-    <label>
-      <input type="radio" name="payment" value="bank">
-      Bank
-    </label>
-
-    <div id="bankBox" class="hidden">
-      <p>Maybank - 123456789</p>
-      <input type="file" id="receipt">
-    </div>
-
-    <button type="submit" class="btn btn-primary">
-      Submit Order
-    </button>
-
-  </form>
+</form>
 
 </aside>
 
 </main>
 
-<div id="thankYou" class="hidden">
-  <h2>Thank You!</h2>
-
-  <div id="receiptSummary"></div>
-
-  <button id="newOrderBtn" class="btn btn-secondary">
-    New Order
-  </button>
+<div id="thankYou" class="thank-you hidden">
+  <div class="card">
+    <h2>Thank You!</h2>
+    <div id="receiptSummary"></div>
+    <button id="newOrderBtn" class="btn btn-secondary">New Order</button>
+  </div>
 </div>
 
 <script src="j.script.js"></script>
