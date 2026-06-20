@@ -43,7 +43,7 @@ It demonstrates real-world concepts such as DOM manipulation, dynamic UI updates
 - Receipt summary generation
 - Thank you screen after submission
 - New order reset button
-
+ 
 ---
 
 ## 🛠️ Tech Stack
@@ -55,7 +55,7 @@ It demonstrates real-world concepts such as DOM manipulation, dynamic UI updates
 ---
 
 ## 📁 Project Structure
-Naija-Bites/
+## Naija-Bites/
 │
 ├── index.html
 ├── style.css
