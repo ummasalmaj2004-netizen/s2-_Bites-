@@ -1,23 +1,19 @@
-<h2>Admin Dashboard</h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<h2>Admin Dashboard</h2>
 <div id="orders"></div>
 
-<script>
-db.collection("orders").onSnapshot(snapshot => {
-  let html = "";
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
-  snapshot.forEach(doc => {
-    let data = doc.data();
+<script src="firebase.js"></script>
+<script src="admin.js"></script>
 
-    html += `
-      <div style="border:1px solid #ccc; margin:10px; padding:10px;">
-        <p><b>Name:</b> ${data.name}</p>
-        <p><b>Total:</b> RM ${data.total}</p>
-        <p><b>Phone:</b> ${data.phone}</p>
-      </div>
-    `;
-  });
-
-  document.getElementById("orders").innerHTML = html;
-});
-</script>
+</body>
+</html>
