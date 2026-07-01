@@ -1,4 +1,4 @@
-# 🍲 Naija Bites  
+# 🍲S² Bites ✨  
 ### Interactive Online Food Ordering System
 
 A modern, responsive food ordering web application that simulates a real-world restaurant ordering experience. Users can browse menu items, select quantities, view a live cart, and place orders with customer details and payment options.
