@@ -20,7 +20,26 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+// 👇 PUT YOUR REGISTER & LOGIN HERE
 
+function register() {
+  firebase.auth().createUserWithEmailAndPassword(
+    email.value,
+    password.value
+  ).then(() => {
+    alert("Registered!");
+    window.location.href = "home.html";
+  });
+}
+
+function login() {
+  firebase.auth().signInWithEmailAndPassword(
+    email.value,
+    password.value
+  ).then(() => {
+    window.location.href = "home.html";
+  });
+}
 // ==========================
 // SETTINGS
 // ==========================
