@@ -1,4 +1,6 @@
-// Your web app's Firebase configuration
+// ==========================
+// FIREBASE CONFIG
+// ==========================
 const firebaseConfig = {
   apiKey: "AIzaSyDwcUC1vEAOQX3F6qbsLMRquByc1tHh33c",
   authDomain: "square-bites.firebaseapp.com",
@@ -8,14 +10,18 @@ const firebaseConfig = {
   appId: "1:714058252261:web:9210d9b22f47fe3eb4790c"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase (COMPAT VERSION)
+firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 
+// ==========================
+// SETTINGS
+// ==========================
 const DELIVERY = 5;
 const cart = {};
 
+// MENU PRICES
 const MENU = {
   jollof: 12,
   fried: 12,
@@ -25,20 +31,23 @@ const MENU = {
   chin: 5
 };
 
+
+// ==========================
+// CART FUNCTIONS
+// ==========================
 function changeQty(id, val) {
   cart[id] = Math.max(0, (cart[id] || 0) + val);
-  document.getElementById('qty-' + id).value = cart[id];
+  document.getElementById("qty-" + id).value = cart[id];
   updateCart();
 }
 
 function setQty(id, val) {
   cart[id] = Math.max(0, parseInt(val) || 0);
-  document.getElementById('qty-' + id).value = cart[id];
+  document.getElementById("qty-" + id).value = cart[id];
   updateCart();
 }
 
 function updateCart() {
-
   let subtotal = 0;
   let html = "";
 
@@ -71,7 +80,10 @@ function updateCart() {
     "RM " + (subtotal + delivery).toFixed(2);
 }
 
+
+// ==========================
 // PAYMENT TOGGLE
+// ==========================
 document.querySelectorAll('input[name="payment"]').forEach(radio => {
   radio.addEventListener("change", function () {
     const bankBox = document.getElementById("bankBox");
@@ -83,8 +95,11 @@ document.querySelectorAll('input[name="payment"]').forEach(radio => {
   });
 });
 
-// FORM SUBMIT
-document.getElementById("orderForm").addEventListener("submit", function (e) {
+
+// ==========================
+// FORM SUBMIT + FIREBASE SAVE
+// ==========================
+document.getElementById("orderForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const name = document.getElementById("name").value;
@@ -104,6 +119,25 @@ document.getElementById("orderForm").addEventListener("submit", function (e) {
   const delivery = subtotal > 0 ? DELIVERY : 0;
   const total = subtotal + delivery;
 
+  // SAVE TO FIREBASE 🔥
+  try {
+    await db.collection("orders").add({
+      name: name,
+      phone: phone,
+      address: address,
+      cart: cart,
+      subtotal: subtotal,
+      delivery: delivery,
+      total: total,
+      time: new Date()
+    });
+
+    console.log("Saved to Firestore ✔");
+  } catch (error) {
+    console.error("Firebase error:", error);
+    alert("Failed to save order!");
+  }
+
   summary += `
     <hr>
     <p><b>Subtotal:</b> RM ${subtotal.toFixed(2)}</p>
@@ -120,7 +154,10 @@ document.getElementById("orderForm").addEventListener("submit", function (e) {
   document.getElementById("thankYou").classList.remove("hidden");
 });
 
+
+// ==========================
 // NEW ORDER BUTTON
+// ==========================
 document.getElementById("newOrderBtn").addEventListener("click", function () {
   location.reload();
 });
