@@ -1,86 +1,168 @@
-# S² Bites — Cloud Food Ordering
+# 🍲 S² Bites – Cloud-Based Food Ordering System
 
-A complete Firebase-backed food ordering site: customer login/register,
-a menu with cart, cash/bank-transfer checkout with receipt upload, and
-a real-time admin dashboard.
+![Status](https://img.shields.io/badge/Status-Completed-success)
+![HTML](https://img.shields.io/badge/HTML5-orange)
+![CSS](https://img.shields.io/badge/CSS3-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-yellow)
+![Firebase](https://img.shields.io/badge/Firebase-Cloud-orange)
+![Vercel](https://img.shields.io/badge/Hosted_on-Vercel-black)
 
-## Files
+## 📖 Project Overview
 
-| File | Purpose |
-|---|---|
-| `index.html` | Login / register screen |
-| `home.html` | Menu, cart, checkout, thank-you screen |
-| `admin.html` | Real-time order dashboard (admin only) |
-| `style.css` | All styling for every page |
-| `firebase.js` | Firebase app/auth/firestore/storage init |
-| `auth.js` | Login + register logic, routes by email |
-| `app.js` | Menu rendering, cart, checkout, order submission |
-| `admin.js` | Live order feed, status updates, delete |
-| `images/` | Add your own food photos here (see `images/README.txt`) |
+S² Bites is a cloud-based food ordering system developed as part of a Cloud Computing group project.
 
-## Running it
+The system enables customers to register, log in, browse Nigerian food items, place food orders, choose a payment method, upload payment receipts for bank transfers, and store order information securely in the cloud using Firebase.
 
-1. Add real food photos into `images/` using the exact filenames listed
-   in `images/README.txt` (the site works without them too — cards just
-   show a plain placeholder).
-2. Open `index.html` in a browser, or serve the folder with any static
-   file server (e.g. `npx serve .`). Firebase Auth needs `http://` or
-   `https://`, not `file://`, to work reliably in most browsers.
-3. Create the admin account once, either in the Firebase console or by
-   registering through the site with the email `admin@squarebites.com`.
-   Any other email registered through the site becomes a regular
-   customer.
+The application is deployed on Vercel, providing users with real-time access from any device with an internet connection.
 
-## Firebase project setup (square-bites)
+---
 
-In the Firebase console for this project:
+## 🎯 Objectives
 
-1. **Authentication → Sign-in method** → enable **Email/Password**.
-2. **Firestore Database** → create the database (production mode is fine).
-3. **Storage** → make sure the default bucket is enabled.
+- Develop a cloud-native food ordering application.
+- Demonstrate cloud deployment using modern cloud technologies.
+- Implement secure user authentication.
+- Store customer orders in a real-time cloud database.
+- Apply service-oriented architecture concepts.
+- Demonstrate cloud security practices.
 
-### Suggested Firestore rules
+---
+
+## ✨ Features
+
+- User Registration
+- User Login
+- Browse Food Menu
+- Add Food Items
+- Automatic Price Calculation
+- Delivery Fee Calculation
+- Cash Payment
+- Bank Transfer Payment
+- Upload Payment Receipt
+- Store Orders in Firebase Firestore
+- Cloud-Based Data Storage
+- Responsive User Interface
+
+---
+
+## ☁ Cloud Technologies Used
+
+| Service | Purpose |
+|----------|---------|
+| Vercel | Cloud Hosting |
+| Firebase Authentication | User Registration & Login |
+| Cloud Firestore | Store Customer Orders |
+| Firebase Storage | Store Uploaded Receipts |
+| GitHub | Version Control |
+
+---
+
+## 💻 Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript (ES6)
+- Firebase Authentication
+- Cloud Firestore
+- Firebase Storage
+- Git & GitHub
+- Vercel
+
+---
+
+## 🏗 System Architecture
 
 ```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
-    }
-    match /orders/{orderId} {
-      allow create: if request.auth != null;
-      allow read, update, delete: if request.auth != null &&
-        (request.auth.token.email == "admin@squarebites.com" ||
-         resource.data.userEmail == request.auth.token.email);
-    }
-  }
-}
+User
+   │
+   ▼
+Vercel Hosting
+   │
+   ▼
+S² Bites Web Application
+   │
+   ├────────► Firebase Authentication
+   │
+   ├────────► Cloud Firestore
+   │
+   └────────► Firebase Storage
 ```
 
-### Suggested Storage rules
+---
+
+## 🔒 Security Features
+
+- Firebase Authentication
+- Secure Login System
+- Cloud Firestore Database
+- Cloud Storage
+- Protected User Sessions
+- Client-side Input Validation
+
+---
+
+## 📁 Project Structure
 
 ```
-rules_version = '2';
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /receipts/{userId}/{fileName} {
-      allow write: if request.auth != null && request.auth.uid == userId;
-      allow read: if request.auth != null;
-    }
-  }
-}
+S2-Bites
+│
+├── index.html
+├── home.html
+├── style.css
+├── firebase.js
+├── app.js
+├── auth.js
+├── images/
+├── README.md
+└── assets/
 ```
 
-These rules let signed-in customers create orders and upload their own
-receipts, while only the admin account can read/update/delete every
-order (customers can still read their own).
+---
 
-## Notes
+## 🚀 Live Demo
 
-- `admin@squarebites.com` is hard-coded in `firebase.js` as `ADMIN_EMAIL`
-  and checked on both the client (`admin.js`) and should also be
-  enforced server-side via the Firestore rules above — client-side
-  checks alone are not real security.
-- Order status flows through three states: `Pending → Preparing →
-  Delivered`, editable any time from the dashboard, plus delete.
+**Website**
+
+https://s2-bites.vercel.app/
+
+---
+
+## 📂 GitHub Repository
+
+https://github.com/ummasalmaj2004-netizen/s2-_Bites-
+
+---
+
+## 👥 Project Members
+
+- Mohammad Shohan Saleem
+- Ummasalma Jamil
+
+---
+
+## 🔮 Future Improvements
+
+- Admin Dashboard
+- Order Tracking
+- Email Notifications
+- Online Payment Gateway
+- Customer Order History
+- Analytics Dashboard
+
+---
+
+## 📚 References
+
+Firebase. (2025). *Firebase Documentation*. https://firebase.google.com/docs
+
+Vercel. (2025). *Vercel Documentation*. https://vercel.com/docs
+
+GitHub. (2025). *GitHub Documentation*. https://docs.github.com/
+
+Mozilla Developer Network. (2025). *HTML, CSS and JavaScript Documentation*. https://developer.mozilla.org/
+
+---
+
+## 📄 License
+
+This project was developed for academic purposes as part of a Cloud Computing course.
