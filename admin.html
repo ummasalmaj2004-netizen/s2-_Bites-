@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>S² Bites — Admin Dashboard</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">S<sup>2</sup> Bites <span style="opacity:.6; font-size:.8rem;">/ admin</span></div>
+  <div class="user-chip">
+    <span id="admin-email-display">…</span>
+    <button class="logout-btn" id="logout-btn">Log out</button>
+  </div>
+</div>
+
+<div class="admin-wrap">
+
+  <div class="admin-header">
+    <div>
+      <div class="eyebrow">Kitchen control</div>
+      <h1>Order dashboard</h1>
+    </div>
+    <div class="stat-row">
+      <div class="stat-pill"><div class="num" id="stat-total">0</div><div class="lbl">Total</div></div>
+      <div class="stat-pill"><div class="num" id="stat-pending">0</div><div class="lbl">Pending</div></div>
+      <div class="stat-pill"><div class="num" id="stat-preparing">0</div><div class="lbl">Preparing</div></div>
+      <div class="stat-pill"><div class="num" id="stat-delivered">0</div><div class="lbl">Delivered</div></div>
+    </div>
+  </div>
+
+  <div class="filter-row" id="filter-row">
+    <div class="filter-chip active" data-filter="all">All orders</div>
+    <div class="filter-chip" data-filter="Pending">Pending</div>
+    <div class="filter-chip" data-filter="Preparing">Preparing</div>
+    <div class="filter-chip" data-filter="Delivered">Delivered</div>
+  </div>
+
+  <div id="orders-container">
+    <div class="loader">Loading orders…</div>
+  </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<script src="firebase.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
