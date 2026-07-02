@@ -13,11 +13,10 @@ const firebaseConfig = {
   appId: "1:714058252261:web:9210d9b22f47fe3eb4790c"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-const db = firebase.firestore();
 const auth = firebase.auth();
+const db = firebase.firestore();
 const storage = firebase.storage();
 
 const ADMIN_EMAIL = "admin@squarebites.com";
